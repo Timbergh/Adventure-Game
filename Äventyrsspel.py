@@ -82,7 +82,7 @@ def doors():
             print("Returning to menu...")
         if left_open == True and middle_open == True and right_open == True:
             clearConsole()
-            print("You have no doors left\nreturning to menu...")
+            print("You have no doors left\nReturning to menu...")
             break
 
 
