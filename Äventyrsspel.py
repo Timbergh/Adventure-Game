@@ -4,9 +4,9 @@ import time
 
 
 class Player:
-    def __init__(self, name, hp, dmg):
+    def __init__(self, name, maxhp, dmg):
         self.name = name
-        self.hp = hp
+        self.maxhp = maxhp
         self.dmg = dmg
 
     def __str__(self):
@@ -15,7 +15,7 @@ class Player:
         Name: {}
         Hp: {}
         Damage: {}
-        -------------""".format(self.name, self.hp, self.dmg)
+        -------------""".format(self.name, self.maxhp, self.dmg)
 
 
 class Items:
@@ -56,6 +56,7 @@ def random_encounter(rand_index, your_items):
         re = "encounter a monster"
     if rand_index == 3:
         re = "found out you are standing on a trap!"
+        player.hp - 1
     return re
 
 
@@ -335,22 +336,23 @@ def stats(player):
 def create_character():
     name = input("Enter your name -> ")
     random_stats = rand.randint(1, 2)
-    hp = random_stats
+    maxhp = random_stats
     dmg = 3 - random_stats
-    return Player(name, hp, dmg)
+    return Player(name, maxhp, dmg)
 
 
 def main():
+    global player
     player = create_character()
     clearConsole()
     character = open("char1.txt", "r")
-    print(f"Hello {player.name}!\nThis is you")
+    print(f"Hello {player.name}\nThis is you")
     print(character.read())
     input("Press enter to continue")
     clearConsole()
     print("I will now calculate your stats...\n")
     time.sleep(1.5)
-    print(f"HP = {player.hp}")
+    print(f"HP = {player.maxhp}")
     time.sleep(1.5)
     print(f"Damage = {player.dmg}\n")
     input("Press enter to continue")
