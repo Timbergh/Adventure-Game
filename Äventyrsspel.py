@@ -19,12 +19,15 @@ class Items:
         self.desc = desc
 
     def __str__(self):
-        return "{}\n=====\n{}\nValue: {}\n".format(self.name, self.desc)
+        return "{}".format(self.name)
 
 
-class Enemy:
+class Enemy(Player):
     def __init__(self):
         pass
+
+    def special_attack():
+        print("aa")
 
 
 def clearConsole():
@@ -34,9 +37,17 @@ def clearConsole():
     os.system(command)
 
 
-def random_encounter(rand_index):
+def random_encounter(rand_index, your_items):
+    burgir = Items("Heals you for __HP", "Burgir")
+    roids = Items("Makes you a glasscannon", "Roids")
+    stick = Items("Makes you deal one more damage", "Stick")
+    belt = Items(
+        "Permanently increase your damage by two and hp by two", "Belt")
+    dripcap = Items("You look extra drip and gain one max hp", "Drip Cap")
+    item_pool = [burgir, roids, stick, belt, dripcap]
     if rand_index == 1:
         re = "found an item"
+        your_items.append(rand.choice(item_pool))
     if rand_index == 2:
         re = "encounter a monster"
     if rand_index == 3:
@@ -94,7 +105,6 @@ def doors():
                 |    /      |   |    [M]    |   |    [R]    |
                 |__/________|   |___________|   |___________|
 
-                You opend the left door and {random_encounter(rand_index)}
                 """)
                 time.sleep(0.3)
                 clearConsole()
@@ -108,7 +118,7 @@ def doors():
                 | /         |   |    [M]    |   |    [R]    |
                 |/__________|   |___________|   |___________|
 
-                You opend the left door and {random_encounter(rand_index)}
+                You opend the left door and {random_encounter(rand_index, your_items)}
                 """)
             left_open = True
 
@@ -142,7 +152,6 @@ def doors():
                 |    [L]    |   |    /      |   |    [R]    |
                 |___________|   |__/________|   |___________|
 
-                You opend the middle door and {random_encounter(rand_index)}
                 """)
                 time.sleep(0.3)
                 clearConsole()
@@ -156,7 +165,7 @@ def doors():
                 |    [L]    |   | /         |   |    [R]    |
                 |___________|   |/__________|   |___________|
 
-                You opend the middle door and {random_encounter(rand_index)}
+                You opend the middle door and {random_encounter(rand_index, your_items)}
                 """)
             middle_open = True
         elif choose_door == "r":  # RIGHT DOOR
@@ -189,7 +198,6 @@ def doors():
                 |    [L]    |   |    [M]    |   |    /      |
                 |___________|   |___________|   |__/________|
 
-                You opend the right door and {random_encounter(rand_index)}
                 """)
                 time.sleep(0.3)
                 clearConsole()
@@ -203,7 +211,7 @@ def doors():
                 |    [L]    |   |    [M]    |   | /         |
                 |___________|   |___________|   |/__________|
 
-                You opend the right door and {random_encounter(rand_index)}
+                You opend the right door and {random_encounter(rand_index, your_items)}
                 """)
             right_open = True
         elif choose_door == "q":  # BACK TO MENU
@@ -217,9 +225,10 @@ def doors():
                 break
 
 
-def inventory():
-    burgir = Items("Heals you for __HP", "Burgir")
-    your_items = [burgir.name]
+your_items = []
+
+
+def inventory(your_items):
     try:
         item_one = your_items[0]
     except:
@@ -246,63 +255,164 @@ def inventory():
             ------------------------------------------
     """)
     while True:
-        inv = int(input("            Select your item 1-5 -> "))
+        inv = input(
+            "            Scroll through items 1-5 | Select Item [s] | Back to menu [q] -> ")
         clearConsole()
-        if inv == 1:
+        if inv == "1":
             clearConsole()
             print(f"""
             ----------------INVENTORY----------------
             |  ->{item_one}<-  |   {item_two}    |   {item_three}    |   {item_four}    |   {item_five}    |
             -----------------------------------------
             """)
-        elif inv == 2:
+        elif inv == "2":
             clearConsole()
             print(f"""
             ----------------INVENTORY----------------
             |   {item_one}    |  ->{item_two}<-  |   {item_three}    |   {item_four}    |   {item_five}    |
             -----------------------------------------
             """)
-        elif inv == 3:
+        elif inv == "3":
             clearConsole()
             print(f"""
             ----------------INVENTORY-----------------
             |   {item_one}    |   {item_two}   |   ->{item_three}<-   |   {item_four}    |   {item_five}    |
             ------------------------------------------
             """)
-        elif inv == 4:
+        elif inv == "4":
             clearConsole()
             print(f"""
             ----------------INVENTORY-----------------
             |   {item_one}    |   {item_two}   |   {item_three}    |   ->{item_four}<-   |   {item_five}    |
             ------------------------------------------
             """)
-        elif inv == 5:
+        elif inv == "5":
             clearConsole()
             print(f"""
             ----------------INVENTORY-----------------
             |   {item_one}    |   {item_two}   |   {item_three}    |   {item_four}    |   ->{item_five}<-   |
             ------------------------------------------
             """)
+        elif inv == "q":
+            clearConsole()
+            print("Returning to menu...")
+            break
 
 
-while True:
-    menu = input("""
-    --------------MENU--------------
-    | [i] Inventory                |
-    | [s] Stats                    |
-    | [c] Continue                 |
-    | [q] Quit                     |
-    |                              |
-    |                              |
-    --------------------------------
-    """).casefold()
-    if menu == "i":
-        clearConsole()
-        inventory()
-    elif menu == "c":
-        clearConsole()
-        doors()
-    elif menu == "q":
-        clearConsole()
-        print("Quiting game...")
-        break
+"""def create_character():
+    namn = input("namn?")
+    return Player(namn, hp, dmg)
+
+"""
+
+
+def main():
+    while True:
+        menu = input("""
+        --------------MENU--------------
+        | [i] Inventory                |
+        | [s] Stats                    |
+        | [c] Continue                 |
+        | [q] Quit                     |
+        |                              |
+        |                              |
+        --------------------------------
+        """).casefold()
+        if menu == "i":
+            clearConsole()
+            inventory(your_items)
+        elif menu == "c":
+            clearConsole()
+            doors()
+        elif menu == "q":
+            clearConsole()
+            print("Quiting game...")
+            break
+
+
+main()
+
+"""
+                        @@@   @@                                                 
+                  @@@   @@@@@@@@@@@@                                            
+               @@@&  @@@@@@@@@@@@@@@@@                                          
+             @@@@   @@@@@@@@@@@@@@@@@@@                                         
+            @@@   @@@@@@@@@@@@@@@@@@@@@@                                        
+           @@@/  @@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@@   @@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@   @@@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@   @@@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@   @@@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@   @@@@@@@@@@@@@@@@@@@@@@@@                                        
+          @@@   @@@@@@@@@@@@@@@@@@@@@@@                                         
+          @@@&  @@@@@@@@@@@@@@@@@@@@@@@                                         
+           @@@   @@@@@@@@@@@@@@@@@@@@@                                          
+            @@@   @@@@@@@@@@@@@@@&                                              
+             @@@  .@@@@@@@@        @@@@@@@@@@@@@@@@@@                           
+                @   @        @@@@@@@@@@@@   (@@@@@@@@@@@@@@@                    
+                       @@@@@@@@@                       @@@@@@@@                 
+                 %@    @@@@@@@@#                         @@@@@@@@               
+                  @@@@    @@@@@@@@@                     @@@@@@@@@               
+                   @@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 
+                    @@@@@@@@@@       %@@@@@@@@@@@@@@@@@@@@                      
+                     *@@@@@@@@@@@@@@@                     @@@@                  
+                       .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    
+                          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                      
+                          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@                         
+                          @@@@@@@@@@  @@@@@@@@@@                                
+                          @@@@@@@@@@@@@@@@@@@@@@@@@@@                           
+                          @@@@@@@@@@@@@@@@@@@@@@@@@@@@                          
+                         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                         
+                          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@                         
+                              @@@@@@@@@@@@@@@@@@@@@@@@@                         
+
+  
+"""
+"""
+             .,,,,,,,,,,,,,,,,,,,,,,,,,,,.        
+             .,,,,,,,,,,,,,,,,,,,,,,,,,,,.        
+         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
+         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
+         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
+       ...,,,,,,,,,,,....,(((((((((((((((/,,,.    
+       ...,,,,.......,,,,/###############(***,    
+       ...,,,........*/((#%%%%%%%%%%%%%%%#(((*    
+       ..........,//((%%%/  .*%%%%%%%/.  *%%%/    
+       ..........*(((#%%%/   *#%%%%%%/   *%%%/    
+       ......*(((#%%%%%%%/   *#%%%%%%/   *%%%/    
+          ...*(((#%%%%%%%#(((#%%%%%%%#(((#%%%/    
+          ...*(((#%%%%%%%%%%%%%%%%%%%%%%%%%%%/    
+             *#%%#(((#%%%%%%%%%%%%%%%%%%%#(((*    
+            .*(((////(###################(***,    
+          ..(/.......,*******************,        
+         *%%%########/,..*((((((((((((###/        
+         /%%%%%%%%%%#/,..*///////////(#%%/        
+     /#%%%%%%#((((///(%%%#(((*...*((((///,        
+  .*/(%%%%%%%(///////(%%%%%%#/...*%%%#///,        
+  ,#%%%%%%%%%(///(%%%%%%%%%%#/...*%%%#///,        
+  ,#%%%%%%#//((((#%%%%%%%%%%#/...*%%%#(((*....    
+  .((((((((((#%%%%%%%%%%%%%%#/...*%%%%%%%#///,    
+   ,,,,,,,*(##%%%%%%%%%%%/..........,/#%%#///,    
+   ,,,,,,,*(##%%%%%%%%%%%/.....,,....*#%%#///,    
+   ,,,,,,,*(##%%%%%%%%%%%/.....,,....*#%%#///,    
+  ,#%%%%%%%###%%%%%%%(***,.....,,....*#%%#(((*    
+  ,(#########%%%%%%%#/....,,,,,,,,,,,/#%%#(((*    
+  .(((((((#%%%%%%%%%#/....,,,,,,,,,,,/#%%#(((*    
+      ,#%%%%%%%%%#(((*..............,*#%%#///,    
+      ,(##%%%%%%%/...................*#%%/        
+         *###/,,,.....................,,,.        
+          ...............................         
+          ...............................         
+          ...............      ..........         
+          ...............      ..........         
+          ..........           ..........         
+            .....                 .......         
+            .....                 .......         
+           ......                 .......         
+          .......                 .......         
+          .......                 .......         
+          ....,,,,,,,.            ....,,,,,,,.    
+             ........                ........     
+                                                  
+
+"""
