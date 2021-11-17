@@ -10,7 +10,12 @@ class Player:
         self.dmg = dmg
 
     def __str__(self):
-        return "{}\n=====\n{}\nValue: {}\n".format(self.name, self.hp, self.dmg)
+        return """
+        -------------
+        Name: {}
+        Hp: {}
+        Damage: {}
+        -------------""".format(self.name, self.hp, self.dmg)
 
 
 class Items:
@@ -26,9 +31,6 @@ class Enemy(Player):
     def __init__(self):
         pass
 
-    def special_attack():
-        print("aa")
-
 
 def clearConsole():
     command = 'clear'
@@ -37,13 +39,15 @@ def clearConsole():
     os.system(command)
 
 
+burgir = Items("Heals you for 3 Hp", "Burgir")
+roids = Items("Makes you a glasscannon", "Roids")
+stick = Items("Makes you deal one more damage", "Stick")
+belt = Items(
+    "Permanently increase your damage by two and hp by two", "Belt")
+dripcap = Items("You look extra drip and gain one max hp", "Drip Cap")
+
+
 def random_encounter(rand_index, your_items):
-    burgir = Items("Heals you for __HP", "Burgir")
-    roids = Items("Makes you a glasscannon", "Roids")
-    stick = Items("Makes you deal one more damage", "Stick")
-    belt = Items(
-        "Permanently increase your damage by two and hp by two", "Belt")
-    dripcap = Items("You look extra drip and gain one max hp", "Drip Cap")
     item_pool = [burgir, roids, stick, belt, dripcap]
     if rand_index == 1:
         re = "found an item"
@@ -249,6 +253,7 @@ def inventory(your_items):
         item_five = your_items[4]
     except:
         item_five = ""
+    selected_item = None
     print(f"""
             ----------------INVENTORY-----------------
             |   {item_one}    |   {item_two}    |   {item_three}    |   {item_four}    |   {item_five}    |
@@ -265,6 +270,7 @@ def inventory(your_items):
             |  ->{item_one}<-  |   {item_two}    |   {item_three}    |   {item_four}    |   {item_five}    |
             -----------------------------------------
             """)
+            selected_item = item_one
         elif inv == "2":
             clearConsole()
             print(f"""
@@ -272,6 +278,7 @@ def inventory(your_items):
             |   {item_one}    |  ->{item_two}<-  |   {item_three}    |   {item_four}    |   {item_five}    |
             -----------------------------------------
             """)
+            selected_item = item_two
         elif inv == "3":
             clearConsole()
             print(f"""
@@ -279,6 +286,7 @@ def inventory(your_items):
             |   {item_one}    |   {item_two}   |   ->{item_three}<-   |   {item_four}    |   {item_five}    |
             ------------------------------------------
             """)
+            selected_item = item_three
         elif inv == "4":
             clearConsole()
             print(f"""
@@ -286,6 +294,7 @@ def inventory(your_items):
             |   {item_one}    |   {item_two}   |   {item_three}    |   ->{item_four}<-   |   {item_five}    |
             ------------------------------------------
             """)
+            selected_item = item_four
         elif inv == "5":
             clearConsole()
             print(f"""
@@ -293,20 +302,59 @@ def inventory(your_items):
             |   {item_one}    |   {item_two}   |   {item_three}    |   {item_four}    |   ->{item_five}<-   |
             ------------------------------------------
             """)
+            selected_item = item_five
+        elif inv == "s":
+            clearConsole()
+            if selected_item == burgir:
+                print(f"""
+                -------------------
+                {burgir.name}
+                {burgir.desc}
+                -------------------
+                """)
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    your_items.remove(burgir)
+                    inventory(your_items)
+
         elif inv == "q":
             clearConsole()
             print("Returning to menu...")
             break
 
 
-"""def create_character():
-    namn = input("namn?")
-    return Player(namn, hp, dmg)
+def stats(player):
+    print(
+        f"""
+    {player}
+    """)
+    input("     Press any button to go back to menu")
+    clearConsole()
 
-"""
+
+def create_character():
+    name = input("Enter your name -> ")
+    random_stats = rand.randint(1, 2)
+    hp = random_stats
+    dmg = 3 - random_stats
+    return Player(name, hp, dmg)
 
 
 def main():
+    player = create_character()
+    clearConsole()
+    character = open("char1.txt", "r")
+    print(f"Hello {player.name}!\nThis is you")
+    print(character.read())
+    input("Press enter to continue")
+    clearConsole()
+    print("I will now calculate your stats...\n")
+    time.sleep(1.5)
+    print(f"HP = {player.hp}")
+    time.sleep(1.5)
+    print(f"Damage = {player.dmg}\n")
+    input("Press enter to continue")
+    clearConsole()
     while True:
         menu = input("""
         --------------MENU--------------
@@ -324,6 +372,9 @@ def main():
         elif menu == "c":
             clearConsole()
             doors()
+        elif menu == "s":
+            clearConsole()
+            stats(player)
         elif menu == "q":
             clearConsole()
             print("Quiting game...")
@@ -354,7 +405,7 @@ main()
                  %@    @@@@@@@@#                         @@@@@@@@               
                   @@@@    @@@@@@@@@                     @@@@@@@@@               
                    @@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 
-                    @@@@@@@@@@       %@@@@@@@@@@@@@@@@@@@@                      
+                    @@@@@@@ @@@       %@@@@@@@@@@@@@@@@@@@@                      
                      *@@@@@@@@@@@@@@@                     @@@@                  
                        .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    
                           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                      
@@ -367,52 +418,4 @@ main()
                               @@@@@@@@@@@@@@@@@@@@@@@@@                         
 
   
-"""
-"""
-             .,,,,,,,,,,,,,,,,,,,,,,,,,,,.        
-             .,,,,,,,,,,,,,,,,,,,,,,,,,,,.        
-         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
-         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
-         .,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.    
-       ...,,,,,,,,,,,....,(((((((((((((((/,,,.    
-       ...,,,,.......,,,,/###############(***,    
-       ...,,,........*/((#%%%%%%%%%%%%%%%#(((*    
-       ..........,//((%%%/  .*%%%%%%%/.  *%%%/    
-       ..........*(((#%%%/   *#%%%%%%/   *%%%/    
-       ......*(((#%%%%%%%/   *#%%%%%%/   *%%%/    
-          ...*(((#%%%%%%%#(((#%%%%%%%#(((#%%%/    
-          ...*(((#%%%%%%%%%%%%%%%%%%%%%%%%%%%/    
-             *#%%#(((#%%%%%%%%%%%%%%%%%%%#(((*    
-            .*(((////(###################(***,    
-          ..(/.......,*******************,        
-         *%%%########/,..*((((((((((((###/        
-         /%%%%%%%%%%#/,..*///////////(#%%/        
-     /#%%%%%%#((((///(%%%#(((*...*((((///,        
-  .*/(%%%%%%%(///////(%%%%%%#/...*%%%#///,        
-  ,#%%%%%%%%%(///(%%%%%%%%%%#/...*%%%#///,        
-  ,#%%%%%%#//((((#%%%%%%%%%%#/...*%%%#(((*....    
-  .((((((((((#%%%%%%%%%%%%%%#/...*%%%%%%%#///,    
-   ,,,,,,,*(##%%%%%%%%%%%/..........,/#%%#///,    
-   ,,,,,,,*(##%%%%%%%%%%%/.....,,....*#%%#///,    
-   ,,,,,,,*(##%%%%%%%%%%%/.....,,....*#%%#///,    
-  ,#%%%%%%%###%%%%%%%(***,.....,,....*#%%#(((*    
-  ,(#########%%%%%%%#/....,,,,,,,,,,,/#%%#(((*    
-  .(((((((#%%%%%%%%%#/....,,,,,,,,,,,/#%%#(((*    
-      ,#%%%%%%%%%#(((*..............,*#%%#///,    
-      ,(##%%%%%%%/...................*#%%/        
-         *###/,,,.....................,,,.        
-          ...............................         
-          ...............................         
-          ...............      ..........         
-          ...............      ..........         
-          ..........           ..........         
-            .....                 .......         
-            .....                 .......         
-           ......                 .......         
-          .......                 .......         
-          .......                 .......         
-          ....,,,,,,,.            ....,,,,,,,.    
-             ........                ........     
-                                                  
-
 """
