@@ -59,31 +59,132 @@ e_dmg = 1
 
 
 def random_encounter(rand_index, your_items):
-    global hp, e_hp, e_dmg
+    global hp, e_hp, e_dmg, random_item
     item_pool = [burgir, roids, stick, belt, dripcap]
     ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
     enemy_pool = [ogre]
     if rand_index == 1:
         random_item = rand.choice(item_pool)
         your_items.append(random_item)
-        re = f"found an item ({random_item})"
     if rand_index == 2:
-        if rounds < 5:
-            e_hp = e_hp + rounds * 0.3
-            e_hp = round(e_hp)
-            e_dmg = e_dmg + rounds * 0.3
-            e_dmg = math.floor(e_dmg)
-        else:
-            e_hp = e_hp + rounds/1.5 * 0.2
-            e_hp = math.floor(e_hp)
-            e_dmg = e_dmg + rounds/1.5 * 0.2
-            e_dmg = math.floor(e_dmg)
+        e_hp = e_hp + rounds * 0.5
+        e_hp = round(e_hp)
+        ogre.maxhp = e_hp
+        e_dmg = e_dmg + rounds * 0.5
+        e_dmg = math.floor(e_dmg)
         random_enemy = rand.choice(enemy_pool)
-        re = f"encounter a monster {random_enemy}"
+        attack = False
+        open_inventory = False
+        opend_inv = False
+        turn = 1
+        clearConsole()
+        print(
+            f"""
+                            | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                            | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                            | Attack [A] | | Inventory [I] | | Confirm [C] |
+
+                    """)
+        while e_hp != 0 or player.hp != 0:
+            if opend_inv == True:
+                print(
+                    f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
+
+                    """)
+                opend_inv = False
+            if turn % 2 != 0:
+                battle = input("What do you want to do? -> ").casefold()
+                if battle == "a":
+                    open_inventory = False
+                    attack = True
+                    clearConsole()
+                    print(
+                        f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                    """)
+                elif battle == "i":
+                    attack = False
+                    open_inventory = True
+                    clearConsole()
+                    print(
+                        f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
+
+                    """)
+                if battle == "c":
+                    if attack == True:
+                        e_hp = e_hp - player.dmg
+                        turn = turn + 1
+                        clearConsole()
+                        print(
+                            f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
+                    elif open_inventory == True:
+                        clearConsole()
+                        opend_inv = True
+                        inventory(your_items)
+                        clearConsole()
+            elif turn % 2 == 0:
+                clearConsole()
+                player.hp = player.hp - e_dmg
+                turn = turn + 1
+                print(
+                    f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | Attack [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
+                time.sleep(0.5)
+            if e_hp <= 0 or player.hp <= 0:
+                clearConsole()
+                if e_hp <= 0:
+                    print(
+                        f"""
+                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: 0/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | You defeted the Ogre! |
+
+                        """)
+                    input("Press enter to continue ")
+                    e_hp = 1
+                    ogre.maxhp = e_hp
+                    e_dmg = 1
+                    clearConsole()
+                elif player.hp <= 0:
+                    print(
+                        f"""
+                        | Your Hp: 0/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                        | You were defeted by the Ogre! |
+
+                        """)
+                    input("Press enter to continue ")
+                    clearConsole()
+                break
+
     if rand_index == 3:
-        re = "found out you are standing on a trap!"
         player.hp = player.hp - 0
-    return re
 
 
 def doors():
@@ -94,12 +195,13 @@ def doors():
     right_open = False
     fountain = False
     holyopen = False
+    re = False
     if rounds % 5 == 0 and rounds % 10 != 0:
         fountain = True
     else:
         fountain = False
     if fountain == False:
-        print(f"""                  
+        print(f"""
                                         Round {rounds}
                 |You walk into an unkown place and see three doors|
                     _____________   _____________   _____________
@@ -112,7 +214,7 @@ def doors():
                     |___________|   |___________|   |___________|
                     """)
     else:
-        print(f"""                  
+        print(f"""
                                                 Round {rounds}
                         |You walk into an unkown place and see four doors?|
                     _____________   _____________   _____________   _____________
@@ -178,12 +280,26 @@ def doors():
         if holyopen == True:
             clearConsole()
             break
+        if re == True:
+            print(f"""
+                                        Round {rounds}
+                |You walk into an unkown place and see three doors|
+                    _____________   _____________   _____________
+                    |           |   |           |   |           |
+                    |           |   |           |   |           |
+                    |           |   |           |   |           |
+                    |         * |   |         * |   |         * |
+                    |           |   |           |   |           |
+                    |    [L]    |   |    [M]    |   |    [R]    |
+                    |___________|   |___________|   |___________|
+                    """)
+            re = False
         choose_door = input(
             "Which door would you like to enter? [L] [M] [R] or [Q] quit to menu -> ").casefold()
         if choose_door == "l":  # LEFT DOOR
             if left_open == True:
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |  |        |   |           |   |           |
@@ -196,12 +312,18 @@ def doors():
 
                 There is nothing left in this door
                 """)
-            if left_open == False:
+            elif left_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
+                if rand_index == 1:
+                    ri = "found an item!"
+                elif rand_index == 2:
+                    ri = "encounterd a monster!"
+                elif rand_index == 3:
+                    ri = "found out you are standing on a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |      |    |   |           |   |           |
@@ -215,7 +337,7 @@ def doors():
                 """)
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |  |        |   |           |   |           |
@@ -226,14 +348,20 @@ def doors():
                 | /         |   |    [M]    |   |    [R]    |
                 |/__________|   |___________|   |___________|
 
-                You opend the left door and {random_encounter(rand_index, your_items)}
+                You opend the left door and {ri}
                 """)
-            left_open = True
+                left_open = True
+                if rand_index == 2:
+                    input("Press enter to continue")
+                    re = True
+                    random_encounter(rand_index, your_items)
+                else:
+                    random_encounter(rand_index, your_items)
 
         elif choose_door == "m":  # MIDDLE DOOR
             if middle_open == True:
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |  |        |   |           |
@@ -246,12 +374,18 @@ def doors():
 
                 There is nothing left in this door
                 """)
-            if middle_open == False:
+            elif middle_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
+                if rand_index == 1:
+                    ri = "found an item!"
+                elif rand_index == 2:
+                    ri = "encounterd a monster!"
+                elif rand_index == 3:
+                    ri = "found out you are standing on a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |      |    |   |           |
@@ -265,7 +399,7 @@ def doors():
                 """)
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |  |        |   |           |
@@ -276,13 +410,20 @@ def doors():
                 |    [L]    |   | /         |   |    [R]    |
                 |___________|   |/__________|   |___________|
 
-                You opend the middle door and {random_encounter(rand_index, your_items)}
+                You opend the middle door and {ri}
                 """)
-            middle_open = True
+                middle_open = True
+                if rand_index == 2:
+                    input("Press enter to continue")
+                    re = True
+                    random_encounter(rand_index, your_items)
+                else:
+                    random_encounter(rand_index, your_items)
+
         elif choose_door == "r":  # RIGHT DOOR
             if right_open == True:
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |  |        |
@@ -295,12 +436,18 @@ def doors():
 
                 There is nothing left in this door
                 """)
-            if right_open == False:
+            elif right_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
+                if rand_index == 1:
+                    ri = "found an item!"
+                elif rand_index == 2:
+                    ri = "encounterd a monster!"
+                elif rand_index == 3:
+                    ri = "found out you are standing on a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |      |    |
@@ -314,7 +461,7 @@ def doors():
                 """)
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""      
+                print(f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |  |        |
@@ -325,9 +472,16 @@ def doors():
                 |    [L]    |   |    [M]    |   | /         |
                 |___________|   |___________|   |/__________|
 
-                You opend the right door and {random_encounter(rand_index, your_items)}
+                You opend the right door and {ri}
                 """)
-            right_open = True
+                right_open = True
+                if rand_index == 2:
+                    input("Press enter to continue")
+                    re = True
+                    random_encounter(rand_index, your_items)
+                else:
+                    random_encounter(rand_index, your_items)
+
         elif choose_door == "q":  # BACK TO MENU
             clearConsole()
             print("Returning to menu...")
@@ -335,48 +489,55 @@ def doors():
             clearConsole()
             break
         if left_open == True and middle_open == True and right_open == True:
-            quit = input(
-                "You have no doors left\nReturn to menu [Q]").casefold()
-            if quit == "q":
-                clearConsole()
-                print("Returning to menu...")
-                break
+            input(
+                "You have no doors left\nPress enter to continue").casefold()
+            clearConsole()
+            print("Returning to menu...")
+            break
 
 
 your_items = []
 
 
 def inventory(your_items):
-    try:
-        item_one = your_items[0]
-    except:
-        item_one = ""
-    try:
-        item_two = your_items[1]
-    except:
-        item_two = ""
-    try:
-        item_three = your_items[2]
-    except:
-        item_three = ""
-    try:
-        item_four = your_items[3]
-    except:
-        item_four = ""
-    try:
-        item_five = your_items[4]
-    except:
-        item_five = ""
+    item_one = ""
+    item_two = ""
+    item_three = ""
+    item_four = ""
+    item_five = ""
     selected_item = None
-    print(f"""
+    item_used = True
+    inv = ""
+    while inv != "q":
+        try:
+            item_one = your_items[0]
+        except:
+            item_one = ""
+        try:
+            item_two = your_items[1]
+        except:
+            item_two = ""
+        try:
+            item_three = your_items[2]
+        except:
+            item_three = ""
+        try:
+            item_four = your_items[3]
+        except:
+            item_four = ""
+        try:
+            item_five = your_items[4]
+        except:
+            item_five = ""
+        if item_used == True:
+            print(f"""
             ----------------INVENTORY-----------------
             |   {item_one}    |   {item_two}    |   {item_three}    |   {item_four}    |   {item_five}    |
             ------------------------------------------
-    """)
-    inv = ""
-    while inv != "q":
+            """)
+        item_used = False
         inv = input(
-            "            Scroll through items 1-5 | Select Item [s] | Back to menu [q] -> ")
+            "            Select items 1-5 | Confirm [C] | Go back [Q] -> ")
         clearConsole()
         if inv == "1":
             clearConsole()
@@ -418,7 +579,7 @@ def inventory(your_items):
             ------------------------------------------
             """)
             selected_item = item_five
-        elif inv == "s":
+        elif inv == "c":
             clearConsole()
             if selected_item == burgir:  # BURGIR
                 print(f"""
@@ -432,11 +593,11 @@ def inventory(your_items):
                     clearConsole()
                     your_items.remove(burgir)
                     player.hp = player.hp + 3
-                    inventory(your_items)
+                    item_used = True
                 else:
-                    inventory(your_items)
-
-            if selected_item == belt:  # BELT
+                    clearConsole()
+                    item_used = True
+            elif selected_item == belt:  # BELT
                 print(f"""
                 -------------------
                 {belt.name}
@@ -450,11 +611,11 @@ def inventory(your_items):
                     player.maxhp = player.maxhp + 2
                     player.hp = player.hp + 2
                     player.dmg = player.dmg + 1
-                    inventory(your_items)
+                    item_used = True
                 else:
-                    inventory(your_items)
-
-            if selected_item == roids:  # ROIDS
+                    clearConsole()
+                    item_used = True
+            elif selected_item == roids:  # ROIDS
                 print(f"""
                 -------------------
                 {roids.name}
@@ -465,11 +626,11 @@ def inventory(your_items):
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(roids)
-                    inventory(your_items)
+                    item_used = True
                 else:
-                    inventory(your_items)
-
-            if selected_item == dripcap:  # DRIP CAP
+                    clearConsole()
+                    item_used = True
+            elif selected_item == dripcap:  # DRIP CAP
                 print(f"""
                 -------------------
                 {dripcap.name}
@@ -480,12 +641,13 @@ def inventory(your_items):
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(dripcap)
-                    inventory(your_items)
                     player.maxhp = player.maxhp + 1
                     player.hp = player.hp + 1
+                    item_used = True
                 else:
-                    inventory(your_items)
-            if selected_item == stick:  # STICK
+                    clearConsole()
+                    item_used = True
+            elif selected_item == stick:  # STICK
                 print(f"""
                 -------------------
                 {stick.name}
@@ -496,14 +658,14 @@ def inventory(your_items):
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(stick)
-                    inventory(your_items)
                     player.dmg = player.dmg + 1
+                    item_used = True
                 else:
+                    clearConsole()
+                    item_used = True
                     inventory(your_items)
         elif inv == "q":
             clearConsole()
-            print("Returning to menu...")
-            break
 
 
 def stats(player):
