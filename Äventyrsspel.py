@@ -1,6 +1,7 @@
 import random as rand
 import os
 import time
+import math
 
 
 class Player:
@@ -29,8 +30,14 @@ class Items:
 
 
 class Enemy(Player):
-    def __init__(self):
-        pass
+
+    def __str__(self):
+        return """
+        -------------
+        Name: {}
+        Hp: {}
+        Damage: {}
+        -------------""".format(self.name, self.hp, self.dmg)
 
 
 def clearConsole():
@@ -40,25 +47,42 @@ def clearConsole():
     os.system(command)
 
 
-burgir = Items("Heals you for 3 Hp", "Burgir")
-roids = Items("Makes you a glasscannon", "Roids")
-stick = Items("Makes you deal one more damage this round", "Stick")
+burgir = Items("Burgir! (+3 Hp)", "Burgir")
+roids = Items("Makes you a glasscannon (+5 dmg -Hp)", "Roids")
+stick = Items("You hit harder (+1 dmg)", "Stick")
 belt = Items(
     "Permanently increase your damage by one and hp by two", "Belt")
 dripcap = Items("You look extra good and gain one max hp", "Drip Cap")
 
+e_hp = 1
+e_dmg = 1
+
 
 def random_encounter(rand_index, your_items):
-    global hp
+    global hp, e_hp, e_dmg
     item_pool = [burgir, roids, stick, belt, dripcap]
+    ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
+    enemy_pool = [ogre]
     if rand_index == 1:
-        re = "found an item"
-        your_items.append(rand.choice(item_pool))
+        random_item = rand.choice(item_pool)
+        your_items.append(random_item)
+        re = f"found an item ({random_item})"
     if rand_index == 2:
-        re = "encounter a monster"
+        if rounds < 5:
+            e_hp = e_hp + rounds * 0.3
+            e_hp = round(e_hp)
+            e_dmg = e_dmg + rounds * 0.3
+            e_dmg = math.floor(e_dmg)
+        else:
+            e_hp = e_hp + rounds/1.5 * 0.2
+            e_hp = math.floor(e_hp)
+            e_dmg = e_dmg + rounds/1.5 * 0.2
+            e_dmg = math.floor(e_dmg)
+        random_enemy = rand.choice(enemy_pool)
+        re = f"encounter a monster {random_enemy}"
     if rand_index == 3:
         re = "found out you are standing on a trap!"
-        player.hp = player.hp - 1
+        player.hp = player.hp - 0
     return re
 
 
@@ -70,7 +94,7 @@ def doors():
     right_open = False
     fountain = False
     holyopen = False
-    if rounds % 5 == 0:
+    if rounds % 5 == 0 and rounds % 10 != 0:
         fountain = True
     else:
         fountain = False
@@ -461,7 +485,21 @@ def inventory(your_items):
                     player.hp = player.hp + 1
                 else:
                     inventory(your_items)
-
+            if selected_item == stick:  # STICK
+                print(f"""
+                -------------------
+                {stick.name}
+                {stick.desc}
+                -------------------
+                """)
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    clearConsole()
+                    your_items.remove(stick)
+                    inventory(your_items)
+                    player.dmg = player.dmg + 1
+                else:
+                    inventory(your_items)
         elif inv == "q":
             clearConsole()
             print("Returning to menu...")
@@ -510,9 +548,9 @@ def main():
     input("Press enter to continue")
     clearConsole()
     print("I will now calculate your stats...\n")
-    time.sleep(0)
+    time.sleep(0)  # ÄNDRA PÅ TIDEN
     print(f"HP = {player.maxhp}")
-    time.sleep(0)
+    time.sleep(0)  # ÄNDRA PÅ TIDEN
     print(f"Damage = {player.dmg}\n")
     input("Press enter to continue")
     clearConsole()
