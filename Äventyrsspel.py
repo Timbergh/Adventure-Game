@@ -47,6 +47,21 @@ def clearConsole():
     os.system(command)
 
 
+def health_bar(self):
+    """
+    copy paste:
+    ▒
+    ░
+    ▓
+    """
+    missing_hp = self.maxhp - self.hp
+    hp_bar = "▓"*self.hp + f" {self.hp}/{self.maxhp}"
+    if self.hp < self.maxhp:
+        hp_bar = ("▓"*self.hp + "░"*missing_hp +
+                  f" {self.hp}/{self.maxhp}")
+    return hp_bar
+
+
 burgir = Items("Burgir! (+3 Hp)", "Burgir")
 roids = Items("Makes you a glasscannon (+5 dmg -Hp)", "Roids")
 stick = Items("You hit harder (+1 dmg)", "Stick")
@@ -54,25 +69,20 @@ belt = Items(
     "Permanently increase your damage by one and hp by two", "Belt")
 dripcap = Items("You look extra good and gain one max hp", "Drip Cap")
 
-e_hp = 1
-e_dmg = 1
 
-
-def random_encounter(rand_index, your_items):
-    global hp, e_hp, e_dmg, random_item
+def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
     item_pool = [burgir, roids, stick, belt, dripcap]
     ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
-    enemy_pool = [ogre]
     if rand_index == 1:
         random_item = rand.choice(item_pool)
         your_items.append(random_item)
     if rand_index == 2:
-        e_hp = e_hp + rounds * 0.5
+        e_hp = 1 + rounds * 0.5
         e_hp = round(e_hp)
+        ogre.hp = e_hp
         ogre.maxhp = e_hp
-        e_dmg = e_dmg + rounds * 0.5
+        e_dmg = 1 + rounds * 0.5
         e_dmg = math.floor(e_dmg)
-        random_enemy = rand.choice(enemy_pool)
         attack = False
         open_inventory = False
         opend_inv = False
@@ -80,7 +90,7 @@ def random_encounter(rand_index, your_items):
         clearConsole()
         print(
             f"""
-                            | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                            | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                             | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                             | Attack [A] | | Inventory [I] | | Confirm [C] |
@@ -90,7 +100,7 @@ def random_encounter(rand_index, your_items):
             if opend_inv == True:
                 print(
                     f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
@@ -105,7 +115,7 @@ def random_encounter(rand_index, your_items):
                     clearConsole()
                     print(
                         f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
@@ -117,7 +127,7 @@ def random_encounter(rand_index, your_items):
                     clearConsole()
                     print(
                         f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
@@ -125,12 +135,12 @@ def random_encounter(rand_index, your_items):
                     """)
                 if battle == "c":
                     if attack == True:
-                        e_hp = e_hp - player.dmg
+                        ogre.hp = ogre.hp - player.dmg
                         turn = turn + 1
                         clearConsole()
                         print(
                             f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
@@ -139,7 +149,7 @@ def random_encounter(rand_index, your_items):
                     elif open_inventory == True:
                         clearConsole()
                         opend_inv = True
-                        inventory(your_items)
+                        inventory(player, your_items)
                         clearConsole()
             elif turn % 2 == 0:
                 clearConsole()
@@ -147,33 +157,31 @@ def random_encounter(rand_index, your_items):
                 turn = turn + 1
                 print(
                     f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | Attack [A] | | Inventory [I] | | Confirm [C] |
 
                         """)
                 time.sleep(0.5)
-            if e_hp <= 0 or player.hp <= 0:
+            if ogre.hp <= 0 or player.hp <= 0:
                 clearConsole()
-                if e_hp <= 0:
+                if ogre.hp <= 0:
+                    ogre.hp = 0
                     print(
                         f"""
-                        | Your Hp: {player.hp}/{player.maxhp}       | Ogre Hp: 0/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | You defeted the Ogre! |
 
                         """)
                     input("Press enter to continue ")
-                    e_hp = 1
-                    ogre.maxhp = e_hp
-                    e_dmg = 1
                     clearConsole()
                 elif player.hp <= 0:
                     print(
                         f"""
-                        | Your Hp: 0/{player.maxhp}       | Ogre Hp: {e_hp}/{ogre.maxhp}
+                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
                         | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
                         | You were defeted by the Ogre! |
@@ -185,9 +193,13 @@ def random_encounter(rand_index, your_items):
 
     if rand_index == 3:
         player.hp = player.hp - 0
+    return player, ogre
 
 
-def doors():
+def doors(player, rounds):
+    e_hp = 1
+    e_dmg = 1
+
     choose_door = ""
     rand_door = [1, 2, 3]
     left_open = False
@@ -354,9 +366,11 @@ def doors():
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
                 else:
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
 
         elif choose_door == "m":  # MIDDLE DOOR
             if middle_open == True:
@@ -416,9 +430,11 @@ def doors():
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
                 else:
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
 
         elif choose_door == "r":  # RIGHT DOOR
             if right_open == True:
@@ -478,9 +494,11 @@ def doors():
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
                 else:
-                    random_encounter(rand_index, your_items)
+                    random_encounter(rounds, player, e_hp, e_dmg,
+                                     rand_index, your_items)
 
         elif choose_door == "q":  # BACK TO MENU
             clearConsole()
@@ -499,7 +517,7 @@ def doors():
 your_items = []
 
 
-def inventory(your_items):
+def inventory(player, your_items):
     item_one = ""
     item_two = ""
     item_three = ""
@@ -666,31 +684,25 @@ def inventory(your_items):
                     inventory(your_items)
         elif inv == "q":
             clearConsole()
+    return player
 
 
-def stats(player):
+def stats(player, name):
     if player.hp > player.maxhp:
         player.hp = player.maxhp
-    if player.hp == player.maxhp:
-        print(
-            f"""
-        {player}
-        """)
-    elif player.hp < player.maxhp:
-        print(
-            f"""
-        -------------
-        Name: {name}
-        Hp: {player.hp}/{player.maxhp}
-        Damage: {player.dmg}
-        -------------
-        """)
+    print(
+        f"""
+    -------------
+    Name: {name}
+    Hp: {health_bar(player)}
+    Damage: {player.dmg}
+    -------------
+    """)
     input("     Press any button to go back to menu")
     clearConsole()
 
 
 def create_character():
-    global maxhp, hp, dmg, name
     name = input("Enter your name -> ")
     random_stats = rand.randint(2, 4)
     maxhp = random_stats
@@ -700,7 +712,6 @@ def create_character():
 
 
 def main():
-    global player, rounds
     rounds = 0
     player = create_character()
     clearConsole()
@@ -736,14 +747,14 @@ def main():
         """).casefold()
         if menu == "i":
             clearConsole()
-            inventory(your_items)
+            player = inventory(player, your_items)
         elif menu == "c":
             clearConsole()
             rounds = rounds + 1
-            doors()
+            doors(player, rounds)
         elif menu == "s":
             clearConsole()
-            stats(player)
+            stats(player, player.name)
         elif menu == "q":
             clearConsole()
             print("Quiting game...")
@@ -751,3 +762,53 @@ def main():
 
 
 main()
+"""
+___________________
+| {x}         {x} |
+|   \  _---_  /   |
+|    \/     \/    |
+|     |0   0|     |
+|      \ + /      |
+|     / |||  \    |
+|    /  \_/   \   |
+| {x}         {x} |       
+|   {Boss_namn}|
+|  |)      (  (   |
+|  |_) ( ) _) _)  |
+|_________________|
+
+Frog king:
+         o  o   o  o
+         |\/ \^/ \/|
+         |,-------.|
+       ,-.(|)   (|),-.
+       \_*._ ' '_.* _/
+        /`-.`--' .-'\
+   ,--./    `---'    \,--.
+   \   |(  )     (  )|   /
+    \  | ||       || |  /
+     \ | /|\     /|\ | /
+     /  \-._     _,-/  \
+    //| \\  `---'  // |\\
+   /,-.,-.\       /,-.,-.\
+  o   o   o      o   o    o
+  Dominus GT:
+             _____________________
+              \                 /
+               \ ______________/                          
+             ..(.....    ...../,.            
+       ,/(((,( ..             . /*((((/      
+       /((/( ..    ,******,     . **(((.     
+       //(.      .//////////.      .(,/.     
+    /(//((((*(((/  ...,,...  /(((/(((((/(/   
+   /((/(((((/((((/  ..,,..  /((((/(((((//(/  
+  *(((//(((((/((((((((((((((((((//(((((/(((* 
+  ,/(((/((((((//////////(///////((((((/(((/, 
+   /((// @@ /((,,,,,,((((,,,,,,//( @&  (/(/  
+    /(//(// //........((......../( //(////   
+    .,//'  //////((((((((((//////  .. //.   
+      .......                    ........    
+                                                                                                                                                                                                          
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+ """
