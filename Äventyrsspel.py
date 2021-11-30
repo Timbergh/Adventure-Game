@@ -5,12 +5,13 @@ import math
 
 
 class Player:
-    def __init__(self, name, maxhp, hp, dmg, wallet):
+    def __init__(self, name, maxhp, hp, dmg, wallet, frog_item):
         self.name = name
         self.maxhp = maxhp
         self.hp = hp
         self.dmg = dmg
         self.wallet = wallet
+        self.frog_item = False
 
     def __str__(self):
         return """
@@ -37,7 +38,7 @@ class Enemy:
         -------------""".format(self.name, self.hp, self.dmg)
 
 
-class Boss(Player):
+class Boss:
     def __init__(self, name, maxhp, hp, dmg):
         self.name = name
         self.maxhp = maxhp
@@ -163,6 +164,18 @@ def boss_encounter(rounds, player):
                         | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
 
                         """)
+                        if player.frog_item == True:
+                            frogking.hp = round(frogking.hp - frogking.hp*0.1)
+                            time.sleep(0.1)
+                            clearConsole()
+                            print(
+                                f"""
+                            | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(frogking)}
+                            | Your Damage: {player.dmg}     | Ogre Damage: {frogking.dmg}
+
+                            | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
                     elif open_inventory == True:
                         clearConsole()
                         opend_inv = True
@@ -190,10 +203,11 @@ def boss_encounter(rounds, player):
                             | Your Hp: {health_bar(player)}  | Frog-King Hp: {health_bar(frogking)}
                             | Your Damage: {player.dmg}     | Frog-king Damage: {frogking.dmg}
 
-                        | You defeted the Frog-king! |
+                        | You defeted the Frog-king! (Obtained a poisonous tongue) |
 
                         """)
                     input("Press enter to continue ")
+                    your_items.append(frog_tongue)
                     clearConsole()
                 elif player.hp <= 0:
                     player.hp = 0
@@ -234,16 +248,19 @@ butter_stone = Items(
 fish = Items("FIIIIIISH!, eat this to regain some health (+1Hp)", "Fish")
 
 knife = Items(
-    "A clean edged blade, slice your enemies with the fury of its previous owner, Monke (+3 Dmg)", "Monke's Knife")
+    "A clean edged blade, slice your enemies with the fury of its previous owner, Monke (+2 Dmg)", "Monke's Knife")
 poop = Items(
     "Sticky and gross poop, would not recommend eating this one(-1Hp)", "Poop")
 
 gucci_flip_fops = Items(
     "The drippiest shoes you have ever seen (+1 Max Hp)", "Gucci flip flops")
 theos_jacket = Items(
-    "His jacket still smells like him, you're brought back to a simpler time when you wear it(+3 Max Hp)", "Theo's Jacket")
+    "His jacket still smells like him, you're brought back to a simpler time when you wear it (+3 Max Hp)", "Theo's Jacket")
+frog_tongue = Items(
+    "A tongue droped from the Frog-King, it seems like it could be poisonous (+1 dmg/turn)", "Poisonous tongue")
 
-"""--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"""
+# -------------------------------------------------------------------------------------^-Items---Traps-v---------------------------------------------------------------------------------------------------------------------------------
+
 boulder = Trap("Bouldertrap", "A large boulder comes rolling towards you what will you do?", "You punched the boulder and took damage what did you expect?",
                "You tried to flee but did not make it your toes got cruched", "You did nothing and the boulder decided to leave you alone")
 cheese = Trap("Cheesetrap", "You see a large block of cheese on a pedestal what do you want to do?",
@@ -261,7 +278,7 @@ lake = Trap("Laketrap", "After walking through the door you find yourself on a c
 monke = Trap("Monketrap", "You enter a room and find a monke sitting on a log, it looks at you as if it had been waiting for your arrival, what do you do?", "you slowly walk away from the monke, you get away safely", "You trade with the monke, losing 1 random item but gaining a knife it had saved away ",
              "You run away in a haste, but the monke flings its poop after you and it hits your back")
 theo = Trap("Theotrap", "You find yourself standing in a room with your childhood crush Theodor, What do you do? ", "You tell the handsome boy that you are cold, and he offers you his jacket ",
-            "You confess your love for him however, he does not feel the same way and you suffer emotional damage(-1 Max Hp) ", "You choose to avoid confrontation and run away like a little bitch")
+            "You confess your love for him however, he does not feel the same way and you suffer emotional damage(-1 Max Hp) ", "You choose to avoid confrontation and run away")
 """ smt = Trap(" ", " ", " ", " "," ")"""
 """ smt = Trap(" ", " ", " ", " "," ")"""
 """ smt = Trap(" ", " ", " ", " "," ")"""
@@ -359,6 +376,18 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                         | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
 
                         """)
+                        if player.frog_item == True:
+                            ogre.hp = round(ogre.hp - ogre.hp*0.1)
+                            time.sleep(0.1)
+                            clearConsole()
+                            print(
+                                f"""
+                            | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
+                            | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                            | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
                     elif open_inventory == True:
                         clearConsole()
                         opend_inv = True
@@ -452,7 +481,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == jordan:
             print(jordan.desc)
             t_choice = int(
-                input("1. Let him win, 2. Play him in a fair 1v1, 3. Run away"))
+                input("1. Let him win, 2. Play him in a fair 1v1, 3. Run away: "))
             if t_choice == 1:
                 print(jordan.end1)
                 your_items.append(jordans)
@@ -464,7 +493,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == joebiden:
             print(joebiden.desc)
             t_choice = int(
-                input("1.You feel a bit chilly, would you like to sneeze, 2. Wave and leave, 3. Show him your middle finger"))
+                input("1.You feel a bit chilly, would you like to sneeze, 2. Wave and leave, 3. Show him your middle finger: "))
             if t_choice == 1:
                 print(joebiden.end1)
                 your_items.append(tie)
@@ -476,21 +505,21 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == alchemist:
             print(alchemist.desc)
             t_choice = int(
-                input("1.Take the green potion, 2. Take the red potion, 3. Take the blue potion"))
+                input("1.Take the green potion, 2. Take the red potion, 3. Take the blue potion: "))
             if t_choice == 1:
                 print(alchemist.end1)
                 player.hp = player.hp - 2
 
             elif t_choice == 2:
-                print(joebiden.end2)
+                print(alchemist.end2)
                 your_items.append(red_potion)
             elif t_choice == 3:
-                print(joebiden.end3)
+                print(alchemist.end3)
                 player.maxhp = player.maxhp + 1
         if random_trap == lake:
             print(lake.desc)
             t_choice = int(
-                input("1.Fish from the cliff, 2.Dive in to catch one, 3.Sit and rest"))
+                input("1.Fish from the cliff, 2.Dive in to catch one, 3.Sit and rest: "))
             if t_choice == 1:
                 print(lake.end1)
                 your_items.append(fish)
@@ -502,7 +531,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == monke:
             print(monke.desc)
             t_choice = int(
-                input("1.Walk away, 2. Trade with the Monke, 3. Run away"))
+                input("1.Walk away, 2. Trade with the Monke, 3. Run away: "))
             if t_choice == 1:
                 print(monke.end1)
             elif t_choice == 2:
@@ -514,7 +543,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == theo:
             print(theo.desc)
             t_choice = int(
-                input("1.Tell him you're cold, 2. Confess your feelings for him, 3. Run away"))
+                input("1.Tell him you're cold, 2. Confess your feelings for him, 3. Run away: "))
             if t_choice == 1:
                 print(theo.end1)
                 your_items.append(theos_jacket)
@@ -644,7 +673,7 @@ def doors(player, rounds):
                                         |_________________|
         """)
         input("Press enter to continue ")
-        boss_encounter(rounds, player)
+        boss_encounter(rounds, player, )
         boss_open = True
     while choose_door != "q":
         if holyopen == True:
@@ -875,7 +904,7 @@ def doors(player, rounds):
             break
 
 
-your_items = [burgir, stick, red_potion, knife]
+your_items = [frog_tongue]
 temporary_items = []
 
 
@@ -883,70 +912,89 @@ def inventory(player, your_items):
     item_one = ""
     item_two = ""
     item_three = ""
-    item_four = ""
-    item_five = ""
     selected_item = None
     item_used = True
     inv = ""
     while inv != "q":
+        if len(list(your_items)) < 3:
+            your_items.append("      ")
+        elif len(list(your_items)) > 3:
+            try:
+                your_items.remove("      ")
+                print(f"""
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
+                """)
+            except:
+                pass
         try:
             item_one = your_items[0]
         except:
-            item_one = ""
+            item_one = "      "
         try:
             item_two = your_items[1]
         except:
-            item_two = ""
+            item_two = "      "
         try:
             item_three = your_items[2]
         except:
-            item_three = ""
-        try:
-            item_four = your_items[3]
-        except:
-            item_four = ""
-        try:
-            item_five = your_items[4]
-        except:
-            item_five = ""
+            item_three = "      "
         if item_used == True:
+            clearConsole()
             print(f"""
-                            -INVENTORY-
-            |   {item_five}   |   {item_four}   |   ->{item_one}<-   |   {item_two}   |   {item_three}   |
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
             """)
         item_used = False
         inv = input(
             "            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
         clearConsole()
         if inv == "a":
+            your_items.insert(0, your_items.pop())
             try:
-                your_items.insert(0, your_items.pop())
-                print(f"""
-                            -INVENTORY-
-            |   {item_five}   |   {item_four}   |   ->{item_one}<-   |   {item_two}   |   {item_three}   |
-            """)
+                item_one = your_items[0]
             except:
-                print(f"""
-                            -INVENTORY-
-            |   {item_five}   |   {item_four}   |   ->{item_one}<-   |   {item_two}   |   {item_three}   |
+                item_one = "      "
+            try:
+                item_two = your_items[1]
+            except:
+                item_two = "      "
+            try:
+                item_three = your_items[2]
+            except:
+                item_three = "      "
+            print(f"""
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
             """)
         elif inv == "d":
+            your_items += [your_items.pop(0)]
             try:
-                your_items += [your_items.pop(0)]
-                print(f"""
-                            -INVENTORY-
-            |   {item_five}   |   {item_four}   |   ->{item_one}<-   |   {item_two}   |   {item_three}   |
-            """)
+                item_one = your_items[0]
             except:
-                print(f"""
-                            -INVENTORY-
-            |   {item_five}   |   {item_four}   |   ->{item_one}<-   |   {item_two}   |   {item_three}   |
+                item_one = "      "
+            try:
+                item_two = your_items[1]
+            except:
+                item_two = "      "
+            try:
+                item_three = your_items[2]
+            except:
+                item_three = "      "
+            print(f"""
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
             """)
-
         elif inv == "c":
             clearConsole()
             selected_item = item_one
-            if selected_item == burgir:  # BURGIR
+            if selected_item == "      ":  # EMPTY
+                clearConsole()
+                print(f"""
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
+            """)
+            elif selected_item == burgir:  # BURGIR
                 print(f"""
                 -------------------
                 {burgir.name}
@@ -1155,15 +1203,32 @@ def inventory(player, your_items):
                 else:
                     clearConsole()
                     item_used = True
+            elif selected_item == frog_tongue:  # poisonous tongue
+                print(f"""
+                -------------------
+                {frog_tongue.name}
+                {frog_tongue.desc}
+                -------------------
+                """)
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    clearConsole()
+                    your_items.remove(frog_tongue)
+                    player.frog_item = True
+                    item_used = True
+                else:
+                    clearConsole()
+                    item_used = True
 
         elif inv == "q":
             clearConsole()
+        if player.hp > player.maxhp:
+            player.hp = player.maxhp
     return player
 
 
 def stats(player, name):
-    if player.hp > player.maxhp:
-        player.hp = player.maxhp
     print(
         f"""
     -------------
@@ -1182,7 +1247,7 @@ def create_character():
     maxhp = random_stats
     hp = maxhp
     dmg = 5 - random_stats
-    return Player(name, maxhp, hp, dmg, 0)
+    return Player(name, maxhp, hp, dmg, 0, False)
 
 
 def main():
