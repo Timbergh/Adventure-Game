@@ -11,7 +11,7 @@ def main():
     rounds = 0
     player = create_character()
     clearConsole()
-    character = open("char1.txt", "r")
+    character = open("art/char1.txt", "r")
     print(f"Hello {player.name}\nThis is you")
     print(character.read())
     input("Press enter to continue")
@@ -27,7 +27,7 @@ def main():
         if player.hp <= 0:
             clearConsole()
             print("You died...")
-            game_over = open("gameover.txt", "r")
+            game_over = open("art/gameover.txt", "r")
             print(game_over.read())
             time.sleep(5)
             break
@@ -62,7 +62,6 @@ main()
 
 """
              _____________________
-              \                 /
                \ ______________/                          
              ..(.....    ...../,.            
        ,/(((,( ..             . /*((((/      

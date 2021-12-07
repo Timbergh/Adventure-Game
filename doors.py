@@ -62,7 +62,7 @@ def doors(player, rounds):
         if holy_door == "y":
             hdopen1 = open("dooropen/hdopen1.txt", "r")
             hdopen2 = open("dooropen/hdopen2.txt", "r")
-            toilet = open("toilet.txt", "r")
+            toilet = open("art/toilet.txt", "r")
             clearConsole()
             print(hdopen1.read())
             time.sleep(0.3)

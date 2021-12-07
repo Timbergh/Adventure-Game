@@ -1,4 +1,3 @@
-import os
 import time
 
 from Boss import Boss
@@ -14,7 +13,7 @@ def boss_encounter(rounds, player):
         boss_hp = 30
         boss_dmg = 1
         frogking = Boss(name, boss_hp, boss_hp, boss_dmg)
-        frog_txt = open("frogking.txt", "r")
+        frog_txt = open("art/frogking.txt", "r")
         attack = False
         open_inventory = False
         opend_inv = False
