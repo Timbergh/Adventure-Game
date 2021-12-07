@@ -1,4 +1,3 @@
-import random as rand
 import time
 
 from doors import doors
