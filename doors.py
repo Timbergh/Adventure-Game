@@ -349,7 +349,7 @@ def doors(player, rounds):
             break
         if left_open == True and middle_open == True and right_open == True:
             input(
-                "You have no doors left\nPress enter to continue").casefold()
+                "You have no doors left\n\nPress enter to continue").casefold()
             clearConsole()
             print("Returning to menu...")
             break

@@ -384,4 +384,11 @@ def inventory(player, your_items):
             clearConsole()
         if player.hp > player.maxhp:
             player.hp = player.maxhp
+        if inv != "a":
+            item_used = True
+        elif inv != "d":
+            item_used = True
+        elif inv != "c":
+            item_used = True
+
     return player

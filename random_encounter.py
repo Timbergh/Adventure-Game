@@ -170,7 +170,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == cheese:
             print(cheese.desc)
             t_choice = int(
-                input("1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse with copious amonts of drip: "))
+                input("1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse: "))
             if t_choice == 1:
                 print(cheese.end1)
                 player.hp = player.hp + 1

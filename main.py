@@ -55,6 +55,8 @@ def main():
             clearConsole()
             print("Quiting game...")
             break
+        if menu != "i":
+            clearConsole()
 
 
 main()
