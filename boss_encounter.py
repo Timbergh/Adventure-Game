@@ -28,6 +28,7 @@ def boss_encounter(rounds, player):
 
                     """)
         while frogking.hp != 0 or player.hp != 0:
+            frog_txt = open("art/frogking.txt", "r")
             if opend_inv == True:
                 print(
                     f"""                            {frog_txt.read()}
@@ -83,7 +84,7 @@ def boss_encounter(rounds, player):
                             time.sleep(0.1)
                             clearConsole()
                             print(
-                                f"""
+                                f"""                            {frog_txt.read()}
                             | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(frogking)}
                             | Your Damage: {player.dmg}     | Ogre Damage: {frogking.dmg}
 
@@ -109,6 +110,7 @@ def boss_encounter(rounds, player):
                         """)
                 time.sleep(0.5)
             if frogking.hp <= 0 or player.hp <= 0:
+                frog_txt = open("art/frogking.txt", "r")
                 clearConsole()
                 if frogking.hp <= 0:
                     frogking.hp = 0

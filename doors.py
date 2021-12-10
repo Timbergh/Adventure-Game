@@ -353,3 +353,12 @@ def doors(player, rounds):
             clearConsole()
             print("Returning to menu...")
             break
+        if choose_door == "l" and choose_door != "m" and choose_door != "r":
+            pass
+        elif choose_door != "l" and choose_door == "m" and choose_door != "r":
+            pass
+        elif choose_door != "l" and choose_door != "m" and choose_door == "r":
+            pass
+        else:
+            clearConsole()
+            re = True

@@ -19,8 +19,12 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         random_item = rand.choice(item_pool)
         your_items.append(random_item)
     if rand_index == 2:
-        e_hp = 1 + rounds * 0.5
-        e_hp = round(e_hp)
+        if rounds < 5:
+            e_hp = 1 + rounds * 0.8
+            e_hp = round(e_hp)
+        else:
+            e_hp = 1 + rounds * 0.5
+            e_hp = round(e_hp)
         ogre.hp = e_hp
         ogre.maxhp = e_hp
         e_dmg = 1 + rounds * 0.5
