@@ -11,7 +11,7 @@ from trap_pool import *
 from trap_pool import trap_pool
 
 
-def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
+def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items, ):
     item_pool = [burgir, roids, stick, belt, dripcap,
                  tie, butter_stone, gucci_flip_fops]
     ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
@@ -158,11 +158,12 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 break
 
     if rand_index == 3:
-        random_trap = rand.choice(trap_pool)
+        random_trap = trap_pool[0]
+
         if random_trap == boulder:
             print(boulder.desc)
-            t_choice = int(
-                input("1. Punch the boulder, 2. Run away, 3. Do nothing: "))
+            t_choice = input(
+                "1. Punch the boulder, 2. Run away, 3. Do nothing: ")
             if t_choice == 1:
                 print(boulder.end1)
                 player.hp = player.hp - 1
@@ -173,8 +174,8 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 print(boulder.end3)
         if random_trap == cheese:
             print(cheese.desc)
-            t_choice = int(
-                input("1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse: "))
+            t_choice = input(
+                "1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse: ")
             if t_choice == 1:
                 print(cheese.end1)
                 player.hp = player.hp + 1
@@ -186,8 +187,8 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 your_items.append(dripcap)
         if random_trap == santa:
             print(santa.desc)
-            t_choice = int(
-                input("1. Ask for a present, 2. Ask to sit in his lap, 3. Compliment his wife: "))
+            t_choice = (
+                "1. Ask for a present, 2. Ask to sit in his lap, 3. Compliment his wife: ")
             if t_choice == 1:
                 print(santa.end1)
                 player.hp = player.hp - 1
@@ -207,8 +208,8 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 your_items.append(belt)
         if random_trap == jordan:
             print(jordan.desc)
-            t_choice = int(
-                input("1. Let him win, 2. Play him in a fair 1v1, 3. Run away: "))
+            t_choice = input(
+                "1. Let him win, 2. Play him in a fair 1v1, 3. Run away: ")
             if t_choice == 1:
                 print(jordan.end1)
                 your_items.append(jordans)
@@ -219,8 +220,8 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 print(jordan.end3)
         if random_trap == joebiden:
             print(joebiden.desc)
-            t_choice = int(
-                input("1.You feel a bit chilly, would you like to sneeze, 2. Wave and leave, 3. Show him your middle finger: "))
+            t_choice = input(
+                "1.You feel a bit chilly, would you like to sneeze, 2. Wave and leave, 3. Show him your middle finger: ")
             if t_choice == 1:
                 print(joebiden.end1)
                 your_items.append(tie)
@@ -325,7 +326,6 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 your_items.append(rand.choice(item_pool))
             elif t_choice == 2:
                 print(caves.end2)
-
             elif t_choice == 3:
                 print(old_man.end3)
                 player.hp = player.hp - 1

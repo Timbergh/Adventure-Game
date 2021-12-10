@@ -1,13 +1,16 @@
 import time
+import random as rand
 
 from doors import doors
 from clearConsole import clearConsole
 from inventory import *
 from create_character import create_character
 from stats import stats
+from trap_pool import trap_pool
 
 
 def main():
+    rand.shuffle(trap_pool)
     rounds = 0
     player = create_character()
     clearConsole()
