@@ -52,7 +52,8 @@ def inventory(player, your_items):
             "            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
         clearConsole()
         if inv == "a":
-            your_items.insert(0, your_items.pop())
+            your_items.append(your_items.pop(0))
+
             try:
                 item_one = your_items[0]
             except:
@@ -72,7 +73,7 @@ def inventory(player, your_items):
                         Money: {player.wallet}
             """)
         elif inv == "d":
-            your_items += [your_items.pop(0)]
+            your_items.insert(0, your_items.pop())
             try:
                 item_one = your_items[0]
             except:

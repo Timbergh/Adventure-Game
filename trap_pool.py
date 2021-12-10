@@ -33,6 +33,3 @@ caves = Trap("Cavetrap ", "After walking through the door you fins yourself in a
 """ smt = Trap(" ", " ", " ", " ","")"""
 """ smt = Trap(" ", " ", " ", " ","")"""
 """ smt = Trap(" ", " ", " ", " ","")"""
-
-trap_pool = [boulder, cheese, santa, jordan,
-             joebiden, alchemist, lake, monke, theo, computer]

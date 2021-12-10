@@ -6,7 +6,7 @@ from clearConsole import clearConsole
 from inventory import *
 from create_character import create_character
 from stats import stats
-from trap_pool import trap_pool
+from random_encounter import trap_pool
 
 
 def main():

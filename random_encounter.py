@@ -8,10 +8,13 @@ from Enemy import Enemy
 from health_bar import health_bar
 from inventory import *
 from trap_pool import *
-from trap_pool import trap_pool
 
 
-def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items, ):
+trap_pool = [boulder, cheese, santa, jordan,
+             joebiden, alchemist, lake, monke, theo, computer]
+
+
+def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
     item_pool = [burgir, roids, stick, belt, dripcap,
                  tie, butter_stone, gucci_flip_fops]
     ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
@@ -159,7 +162,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items, ):
 
     if rand_index == 3:
         random_trap = trap_pool[0]
-
+        trap_pool.append(trap_pool.pop(0))
         if random_trap == boulder:
             print(boulder.desc)
             t_choice = input(
