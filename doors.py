@@ -30,7 +30,8 @@ def doors(player, rounds):
     else:
         boss_room = False
     if fountain == False and boss_room == False:
-        print(f"""
+        print(
+            f"""
                                         Round {rounds}
                 |You walk into an unkown place and see three doors|
                     _____________   _____________   _____________
@@ -41,9 +42,11 @@ def doors(player, rounds):
                     |           |   |           |   |           |
                     |    [L]    |   |    [M]    |   |    [R]    |
                     |___________|   |___________|   |___________|
-                    """)
+                    """
+        )
     elif fountain == True and boss_room == False:
-        print(f"""
+        print(
+            f"""
                                                 Round {rounds}
                         |You walk into an unkown place and see four doors?|
                     _____________   _____________   _____________   _____________
@@ -54,11 +57,10 @@ def doors(player, rounds):
                     |           |   |           |   |           |   |    |_|    |
                     |    [L]    |   |    [M]    |   |    [R]    |   |           |
                     |___________|   |___________|   |___________|   |___________|
-                    """)
-        print(
-            "Do you wish to enter the Holy door?")
-        holy_door = input(
-            "If you enter you will skip this round y/n -> ").casefold()
+                    """
+        )
+        print("Do you wish to enter the Holy door?")
+        holy_door = input("If you enter you will skip this round y/n -> ").casefold()
         if holy_door == "y":
             hdopen1 = open("dooropen/hdopen1.txt", "r")
             hdopen2 = open("dooropen/hdopen2.txt", "r")
@@ -72,7 +74,8 @@ def doors(player, rounds):
             clearConsole()
             print(toilet.read())
             input(
-                f"\n\nYou took a sip of the holy fountains water and gained {player.maxhp - player.hp} Hp\nPress any button to continue")
+                f"\n\nYou took a sip of the holy fountains water and gained {player.maxhp - player.hp} Hp\nPress any button to continue"
+            )
             toilets_gift = player.maxhp - player.hp
             player.hp = player.hp + toilets_gift
             holyopen = True
@@ -104,6 +107,8 @@ def doors(player, rounds):
             time.sleep(0.3)
             clearConsole()
             print(hd7.read())
+        elif holy_door != "y" and holy_door != "n":
+            pass
     elif fountain == False and boss_room == True:
         print(
             f"""
@@ -122,9 +127,13 @@ def doors(player, rounds):
                                         |      Boss       |
                                         |                 |
                                         |_________________|
-        """)
+        """
+        )
         input("Press enter to continue ")
-        boss_encounter(rounds, player, )
+        boss_encounter(
+            rounds,
+            player,
+        )
         boss_open = True
     while choose_door != "q":
         if holyopen == True:
@@ -134,7 +143,8 @@ def doors(player, rounds):
             clearConsole()
             break
         if re == True:
-            print(f"""
+            print(
+                f"""
                                         Round {rounds}
                 |You walk into an unkown place and see three doors|
                     _____________   _____________   _____________
@@ -145,14 +155,17 @@ def doors(player, rounds):
                     |           |   |           |   |           |
                     |    [L]    |   |    [M]    |   |    [R]    |
                     |___________|   |___________|   |___________|
-                    """)
+                    """
+            )
             re = False
         choose_door = input(
-            "Which door would you like to enter? [L] [M] [R] or [Q] quit to menu -> ").casefold()
+            "Which door would you like to enter? [L] [M] [R] or [Q] quit to menu -> "
+        ).casefold()
         if choose_door == "l":  # LEFT DOOR
             if left_open == True:
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |  |        |   |           |   |           |
@@ -164,7 +177,8 @@ def doors(player, rounds):
                 |/__________|   |___________|   |___________|
 
                 There is nothing left in this door
-                """)
+                """
+                )
             elif left_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
@@ -176,7 +190,8 @@ def doors(player, rounds):
                     ri = "found out you are inside a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |      |    |   |           |   |           |
@@ -187,10 +202,12 @@ def doors(player, rounds):
                 |    /      |   |    [M]    |   |    [R]    |
                 |__/________|   |___________|   |___________|
 
-                """)
+                """
+                )
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |  |        |   |           |   |           |
@@ -202,21 +219,25 @@ def doors(player, rounds):
                 |/__________|   |___________|   |___________|
 
                 You opend the left door and {ri}
-                """)
+                """
+                )
                 left_open = True
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
                 else:
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
 
         elif choose_door == "m":  # MIDDLE DOOR
             if middle_open == True:
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |  |        |   |           |
@@ -228,7 +249,8 @@ def doors(player, rounds):
                 |___________|   |/__________|   |___________|
 
                 There is nothing left in this door
-                """)
+                """
+                )
             elif middle_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
@@ -240,7 +262,8 @@ def doors(player, rounds):
                     ri = "found out you are inside a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |      |    |   |           |
@@ -251,10 +274,12 @@ def doors(player, rounds):
                 |    [L]    |   |    /      |   |    [R]    |
                 |___________|   |__/________|   |___________|
 
-                """)
+                """
+                )
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |  |        |   |           |
@@ -266,21 +291,25 @@ def doors(player, rounds):
                 |___________|   |/__________|   |___________|
 
                 You opend the middle door and {ri}
-                """)
+                """
+                )
                 middle_open = True
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
                 else:
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
 
         elif choose_door == "r":  # RIGHT DOOR
             if right_open == True:
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |  |        |
@@ -292,7 +321,8 @@ def doors(player, rounds):
                 |___________|   |___________|   |/__________|
 
                 There is nothing left in this door
-                """)
+                """
+                )
             elif right_open == False:
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
@@ -304,7 +334,8 @@ def doors(player, rounds):
                     ri = "found out you are inside a trap!"
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |      |    |
@@ -315,10 +346,12 @@ def doors(player, rounds):
                 |    [L]    |   |    [M]    |   |    /      |
                 |___________|   |___________|   |__/________|
 
-                """)
+                """
+                )
                 time.sleep(0.3)
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                     Round {rounds}
                 _____________   _____________   _____________
                 |           |   |           |   |  |        |
@@ -330,16 +363,19 @@ def doors(player, rounds):
                 |___________|   |___________|   |/__________|
 
                 You opend the right door and {ri}
-                """)
+                """
+                )
                 right_open = True
                 if rand_index == 2:
                     input("Press enter to continue")
                     re = True
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
                 else:
-                    random_encounter(rounds, player, e_hp, e_dmg,
-                                     rand_index, your_items)
+                    random_encounter(
+                        rounds, player, e_hp, e_dmg, rand_index, your_items
+                    )
 
         elif choose_door == "q":  # BACK TO MENU
             clearConsole()
@@ -348,8 +384,7 @@ def doors(player, rounds):
             clearConsole()
             break
         if left_open == True and middle_open == True and right_open == True:
-            input(
-                "You have no doors left\n\nPress enter to continue").casefold()
+            input("You have no doors left\n\nPress enter to continue").casefold()
             clearConsole()
             print("Returning to menu...")
             break

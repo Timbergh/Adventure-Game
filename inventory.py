@@ -19,12 +19,14 @@ def inventory(player, your_items):
         elif len(list(your_items)) > 3:
             try:
                 your_items.remove("      ")
-                print(f"""
+                print(
+                    f"""
                                             -INVENTORY-
                         |   {item_three}   | ->{item_one}<- |   {item_two}   |
 
                         Money: {player.wallet}
-                """)
+                """
+                )
             except:
                 pass
         try:
@@ -41,39 +43,20 @@ def inventory(player, your_items):
             item_three = "      "
         if item_used == True:
             clearConsole()
-            print(f"""
+            print(
+                f"""
                                             -INVENTORY-
                         |   {item_three}   | ->{item_one}<- |   {item_two}   |
 
                         Money: {player.wallet}
-            """)
+            """
+            )
         item_used = False
-        inv = input(
-            "            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
+        inv = input("            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
         clearConsole()
         if inv == "a":
-            your_items.append(your_items.pop(0))
-
-            try:
-                item_one = your_items[0]
-            except:
-                item_one = "      "
-            try:
-                item_two = your_items[1]
-            except:
-                item_two = "      "
-            try:
-                item_three = your_items[2]
-            except:
-                item_three = "      "
-            print(f"""
-                                            -INVENTORY-
-                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
-
-                        Money: {player.wallet}
-            """)
-        elif inv == "d":
             your_items.insert(0, your_items.pop())
+
             try:
                 item_one = your_items[0]
             except:
@@ -86,32 +69,59 @@ def inventory(player, your_items):
                 item_three = your_items[2]
             except:
                 item_three = "      "
-            print(f"""
+            print(
+                f"""
                                             -INVENTORY-
                         |   {item_three}   | ->{item_one}<- |   {item_two}   |
 
                         Money: {player.wallet}
-            """)
+            """
+            )
+        elif inv == "d":
+            your_items.append(your_items.pop(0))
+            try:
+                item_one = your_items[0]
+            except:
+                item_one = "      "
+            try:
+                item_two = your_items[1]
+            except:
+                item_two = "      "
+            try:
+                item_three = your_items[2]
+            except:
+                item_three = "      "
+            print(
+                f"""
+                                            -INVENTORY-
+                        |   {item_three}   | ->{item_one}<- |   {item_two}   |
+
+                        Money: {player.wallet}
+            """
+            )
         elif inv == "c":
             clearConsole()
             selected_item = item_one
             if selected_item == "      ":  # EMPTY
                 clearConsole()
-                print(f"""
+                print(
+                    f"""
                                             -INVENTORY-
                         |   {item_three}   | ->{item_one}<- |   {item_two}   |
 
                         Money: {player.wallet}
-            """)
+            """
+                )
             elif selected_item == burgir:  # BURGIR
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {burgir.name}
                 {burgir.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(burgir)
@@ -121,14 +131,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == belt:  # BELT
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {belt.name}
                 {belt.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(belt)
@@ -140,14 +151,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == roids:  # ROIDS
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {roids.name}
                 {roids.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(roids)
@@ -159,14 +171,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == dripcap:  # DRIP CAP
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {dripcap.name}
                 {dripcap.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(dripcap)
@@ -177,14 +190,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == stick:  # STICK
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {stick.name}
                 {stick.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(stick)
@@ -194,48 +208,53 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == jordans:  # JORDANS
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {jordans.name}
                 {jordans.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(jordans)
                     player.maxhp = player.maxhp + 1
+                    player.hp = player.hp + 1
                     item_used = True
                 else:
                     clearConsole()
                     item_used = True
             elif selected_item == tie:  # Tie
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {tie.name}
                 {tie.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(tie)
                     player.maxhp = player.maxhp + 1
+                    player.hp = player.hp + 1
                     item_used = True
                 else:
                     clearConsole()
                     item_used = True
             elif selected_item == red_potion:  # Red potion
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {red_potion.name}
                 {red_potion.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(red_potion)
@@ -245,14 +264,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == knife:  # knife
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {knife.name}
                 {knife.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(knife)
@@ -262,31 +282,34 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == theos_jacket:  # theos_jacket
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {theos_jacket.name}
                 {theos_jacket.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(theos_jacket)
                     player.maxhp = player.maxhp + 3
+                    player.hp = player.hp + 3
                     item_used = True
                 else:
                     clearConsole()
                     item_used = True
             elif selected_item == poop:  # poop
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {poop.name}
                 {poop.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(poop)
@@ -296,31 +319,34 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == gucci_flip_fops:  # gucci_flip_flops
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {gucci_flip_fops.name}
                 {gucci_flip_fops.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(gucci_flip_fops)
                     player.maxhp = player.maxhp + 1
+                    player.hp = player.hp + 1
                     item_used = True
                 else:
                     clearConsole()
                     item_used = True
             elif selected_item == frog_tongue:  # poisonous tongue
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {frog_tongue.name}
                 {frog_tongue.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(frog_tongue)
@@ -330,14 +356,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == frog_crown:  # frog-king's crown
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {frog_crown.name}
                 {frog_crown.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(frog_crown)
@@ -347,14 +374,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == cd_disc:  # cd-rom disc
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {cd_disc.name}
                 {cd_disc.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(cd_disc)
@@ -364,14 +392,15 @@ def inventory(player, your_items):
                     clearConsole()
                     item_used = True
             elif selected_item == pointy_spike:  # cd-rom disc
-                print(f"""
+                print(
+                    f"""
                 -------------------
                 {pointy_spike.name}
                 {pointy_spike.desc}
                 -------------------
-                """)
-                use_item = input(
-                    f"Do you want to use {selected_item} y/n -> ")
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(pointy_spike)
