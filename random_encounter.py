@@ -192,8 +192,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 break
 
     if rand_index == 3:
-        """random_trap = trap_pool[0]"""
-        random_trap = caves
+        random_trap = trap_pool[0]
         trap_pool.append(trap_pool.pop(0))
         if random_trap == boulder:  # Boulder
             print(boulder.desc)

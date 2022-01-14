@@ -3,7 +3,7 @@ from clearConsole import clearConsole
 
 your_items = []
 temporary_items = []
-shop_items = [tie, burgir]
+shop_items = [tie, burgir, red_potion]
 
 
 def inventory(player, your_items):

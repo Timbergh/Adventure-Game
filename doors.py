@@ -5,6 +5,7 @@ from boss_encounter import boss_encounter
 from random_encounter import random_encounter
 from inventory import your_items
 from clearConsole import clearConsole
+from shop import *
 
 
 def doors(player, rounds):
@@ -20,8 +21,9 @@ def doors(player, rounds):
     holyopen = False
     boss_room = False
     boss_open = False
-    shop = False
+    shopdoor = False
     re = False
+    wallet = 0
     if rounds % 5 == 0 and rounds % 10 != 0:
         fountain = True
     else:
@@ -143,7 +145,7 @@ def doors(player, rounds):
             time.sleep(0.3)
             clearConsole()
             print(hd14.read())
-            shop = True
+            shopdoor = True
 
     elif fountain == False and boss_room == True:
         print(
@@ -178,7 +180,7 @@ def doors(player, rounds):
         if boss_open == True:
             clearConsole()
             break
-        if shop == True:
+        if shopdoor == True:
             choose_door = input(
                 "Which door would you like to enter? [L] [M] [R] [S] or [Q] quit to menu -> ").casefold()
             if choose_door == "s":
@@ -189,7 +191,9 @@ def doors(player, rounds):
                 time.sleep(0.3)
                 clearConsole()
                 print(shopopen2.read())
-                shop = False
+                shopdoor = False
+                re = True
+                shop(wallet)
         if re == True:
             print(
                 f"""
