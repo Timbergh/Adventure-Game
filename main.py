@@ -20,9 +20,9 @@ def main():
     input("Press enter to continue")
     clearConsole()
     print("I will now calculate your stats...\n")
-    time.sleep(0)  # ÄNDRA PÅ TIDEN
+    time.sleep(0)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
     print(f"HP = {player.maxhp}")
-    time.sleep(0)  # ÄNDRA PÅ TIDEN
+    time.sleep(0)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
     print(f"Damage = {player.dmg}\n")
     input("Press enter to continue")
     clearConsole()

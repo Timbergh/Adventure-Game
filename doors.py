@@ -20,6 +20,7 @@ def doors(player, rounds):
     holyopen = False
     boss_room = False
     boss_open = False
+    shop = False
     re = False
     if rounds % 5 == 0 and rounds % 10 != 0:
         fountain = True
@@ -45,22 +46,29 @@ def doors(player, rounds):
                     """
         )
     elif fountain == True and boss_room == False:
-        print(
-            f"""
-                                                Round {rounds}
-                        |You walk into an unkown place and see four doors?|
-                    _____________   _____________   _____________   _____________
-                    |           |   |           |   |           |   |     _     |
-                    |           |   |           |   |           |   |   _| |_   |
-                    |           |   |           |   |           |   |  |_   _|  |
-                    |         * |   |         * |   |         * |   |    | |  * |
-                    |           |   |           |   |           |   |    |_|    |
-                    |    [L]    |   |    [M]    |   |    [R]    |   |           |
-                    |___________|   |___________|   |___________|   |___________|
-                    """
-        )
-        print("Do you wish to enter the Holy door?")
-        holy_door = input("If you enter you will skip this round y/n -> ").casefold()
+        holy_door = ""
+        while holy_door != "y":
+            print(
+                f"""
+                                                    Round {rounds}
+                            |You walk into an unkown place and see four doors?|
+                        _____________   _____________   _____________   _____________
+                        |           |   |           |   |           |   |     _     |
+                        |           |   |           |   |           |   |   _| |_   |
+                        |           |   |           |   |           |   |  |_   _|  |
+                        |         * |   |         * |   |         * |   |    | |  * |
+                        |           |   |           |   |           |   |    |_|    |
+                        |    [L]    |   |    [M]    |   |    [R]    |   |           |
+                        |___________|   |___________|   |___________|   |___________|
+                        """
+            )
+            print("Do you wish to enter the Holy door?")
+            holy_door = input(
+                "If you don't enter you may enter the shop (Entering will skip this turn and deny you of the shop) y/n -> ").casefold()
+            if holy_door == "n":
+                break
+            elif holy_door != "n":
+                clearConsole()
         if holy_door == "y":
             hdopen1 = open("dooropen/hdopen1.txt", "r")
             hdopen2 = open("dooropen/hdopen2.txt", "r")
@@ -88,6 +96,13 @@ def doors(player, rounds):
             hd5 = open("holydoor/hd5.txt", "r")
             hd6 = open("holydoor/hd6.txt", "r")
             hd7 = open("holydoor/hd7.txt", "r")
+            hd8 = open("holydoor/hd8.txt", "r")
+            hd9 = open("holydoor/hd9.txt", "r")
+            hd10 = open("holydoor/hd10.txt", "r")
+            hd11 = open("holydoor/hd11.txt", "r")
+            hd12 = open("holydoor/hd12.txt", "r")
+            hd13 = open("holydoor/hd13.txt", "r")
+            hd14 = open("holydoor/hd14.txt", "r")
             print(hd1.read())
             time.sleep(0.3)
             clearConsole()
@@ -107,8 +122,29 @@ def doors(player, rounds):
             time.sleep(0.3)
             clearConsole()
             print(hd7.read())
-        elif holy_door != "y" and holy_door != "n":
-            pass
+            time.sleep(0.3)
+            clearConsole()
+            print(hd8.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd9.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd10.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd11.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd12.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd13.read())
+            time.sleep(0.3)
+            clearConsole()
+            print(hd14.read())
+            shop = True
+
     elif fountain == False and boss_room == True:
         print(
             f"""
@@ -142,6 +178,18 @@ def doors(player, rounds):
         if boss_open == True:
             clearConsole()
             break
+        if shop == True:
+            choose_door = input(
+                "Which door would you like to enter? [L] [M] [R] [S] or [Q] quit to menu -> ").casefold()
+            if choose_door == "s":
+                shopopen1 = open("dooropen/shopopen1.txt", "r")
+                shopopen2 = open("dooropen/shopopen2.txt", "r")
+                clearConsole()
+                print(shopopen1.read())
+                time.sleep(0.3)
+                clearConsole()
+                print(shopopen2.read())
+                shop = False
         if re == True:
             print(
                 f"""
@@ -158,9 +206,10 @@ def doors(player, rounds):
                     """
             )
             re = False
-        choose_door = input(
-            "Which door would you like to enter? [L] [M] [R] or [Q] quit to menu -> "
-        ).casefold()
+        if shop != True:
+            choose_door = input(
+                "Which door would you like to enter? [L] [M] [R] or [Q] quit to menu -> "
+            ).casefold()
         if choose_door == "l":  # LEFT DOOR
             if left_open == True:
                 clearConsole()

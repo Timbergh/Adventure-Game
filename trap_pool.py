@@ -23,10 +23,12 @@ computer = Trap("Computertrap", "You find a 1990's apple macintosh in an old dus
 spikes = Trap("Spiketrap ", "You walk into a room and see a spiketrap on the ground, how do you continue?", "you try to jump over the spikes but fail horribly and fall into them ",
               "You break off one of the spikes and walk back the way you came ", "You carefully walk through the trap, being delicate so to not trigger it, and you get away safely ",)
 old_man = Trap("Oldmantrap ", "You see an old man sitting on a stone holding a cane, you slowly approach him and he offers you three different bags, which one do you take? ", "You took the first bag, and recieved a red potion!",
-               "You picked the second bag and recieved a stick! ", "you picked the second bag, and found a strange note that said *look behind you* but before you could turn around, you fell unconsious")
+               "You picked the second bag and recieved a stick! ", "you picked the third bag, and found a strange note that said *look behind you* but before you could turn around, you fell unconsious")
 caves = Trap("Cavetrap ", "After walking through the door you fins yourself in a cavesystem with three different caves you can walk towards, which one do you choose? ", "You walk through the left cave and find a treasure chest! ",
              "You walk throught the middle-most cave and keep walking for what feels like forever, eventually reaching another door ", "You walk through the right cave and a stalactite falls on your head ")
-""" smt = Trap(" ", " ", " ", " "," ")"""
+league = Trap("Leaguetrap ", "You see a computer that has the game League of Legends booted up on it, what do you do with it? ", "You try the game and after just one game you find yourself seriously depressed and take mental damage (-1hp)",
+              "You run away in a cold sweat, fearing for your life what would've happened had you played the game... ", " You destroy the horrible creation so that other travelers won't get tricked into playing it, and find a sparking power cable in the wreckage")
+
 """ smt = Trap(" ", " ", " ", " ","")"""
 """ smt = Trap(" ", " ", " ", " ","")"""
 """ smt = Trap(" ", " ", " ", " ","")"""

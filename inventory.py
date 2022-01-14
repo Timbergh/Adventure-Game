@@ -52,7 +52,8 @@ def inventory(player, your_items):
             """
             )
         item_used = False
-        inv = input("            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
+        inv = input(
+            "            Scroll A/D | Confirm [C] | Go back [Q] -> ").casefold()
         clearConsole()
         if inv == "a":
             your_items.insert(0, your_items.pop())
@@ -369,7 +370,8 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(frog_crown)
                     item_used = True
-                    playermaxhp = playermaxhp + 5
+                    player.maxhp = player.maxhp + 5
+                    player.hp = player.hp + 5
                 else:
                     clearConsole()
                     item_used = True
@@ -391,7 +393,7 @@ def inventory(player, your_items):
                 else:
                     clearConsole()
                     item_used = True
-            elif selected_item == pointy_spike:  # cd-rom disc
+            elif selected_item == pointy_spike:  # pointy spike
                 print(
                     f"""
                 -------------------
@@ -406,6 +408,42 @@ def inventory(player, your_items):
                     your_items.remove(pointy_spike)
                     item_used = True
                     playerdmg = playerdmg + 1
+                else:
+                    clearConsole()
+                    item_used = True
+            elif selected_item == stalactite:  # stalactite
+                print(
+                    f"""
+                -------------------
+                {stalactite.name}
+                {stalactite.desc}
+                -------------------
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    clearConsole()
+                    your_items.remove(stalactite)
+                    item_used = True
+                    playerdmg = playerdmg + 1
+                else:
+                    clearConsole()
+                    item_used = True
+            elif selected_item == power_cable:  # Power cable
+                print(
+                    f"""
+                -------------------
+                {power_cable.name}
+                {power_cable.desc}
+                -------------------
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    clearConsole()
+                    your_items.remove(power_cable)
+                    item_used = True
+                    playerdmg = playerdmg + 2
                 else:
                     clearConsole()
                     item_used = True

@@ -24,6 +24,7 @@ trap_pool = [
     spikes,
     old_man,
     caves,
+    league,
 ]
 
 
@@ -191,13 +192,15 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 break
 
     if rand_index == 3:
-        random_trap = trap_pool[0]
+        """random_trap = trap_pool[0]"""
+        random_trap = caves
         trap_pool.append(trap_pool.pop(0))
         if random_trap == boulder:  # Boulder
             print(boulder.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
-                t_choice = input("1. Punch the boulder, 2. Run away, 3. Do nothing: ")
+            while t_choice != "1":
+                t_choice = input(
+                    "1. Punch the boulder, 2. Run away, 3. Do nothing: ")
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -213,7 +216,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == cheese:  # Cheese
             print(cheese.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse: "
                 )
@@ -235,7 +238,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == santa:  # Santa
             print(santa.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1. Ask for a present, 2. Ask to sit in his lap, 3. Compliment his wife: "
                 )
@@ -264,7 +267,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == jordan:  # Jordan
             print(jordan.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1. Let him win, 2. Play him in a fair 1v1, 3. Run away: "
                 )
@@ -283,9 +286,9 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == joebiden:  # Joebiden
             print(joebiden.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
-                    "1.You feel a bit chilly, would you like to sneeze, 2. Wave and leave, 3. Show him your middle finger: "
+                    "1.Wave and leave, 2. You feel a bit chilly, would you like to sneeze, 3. Show him your middle finger: "
                 )
                 if t_choice == "2":
                     break
@@ -303,7 +306,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == alchemist:  # Alchemist
             print(alchemist.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1.Take the green potion, 2. Take the red potion, 3. Take the blue potion: "
                 )
@@ -326,7 +329,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == lake:  # Lake
             print(lake.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1.Fish from the cliff, 2.Dive in to catch one, 3.Sit and rest: "
                 )
@@ -346,8 +349,9 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == monke:  # Monke
             print(monke.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
-                t_choice = input("1.Walk away, 2. Trade with the Monke, 3. Run away: ")
+            while t_choice != "1":
+                t_choice = input(
+                    "1.Walk away, 2. Trade with the Monke, 3. Run away: ")
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -364,7 +368,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == theo:  # Theo
             print(theo.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1.Tell him you're cold, 2. Confess your feelings for him, 3. Run away: "
                 )
@@ -385,8 +389,9 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == computer:  # Computer
             print(computer.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
-                t_choice = input("1.Smash it to bits, 2. Plug it in, 3. Ignore it: ")
+            while t_choice != "1":
+                t_choice = input(
+                    "1.Smash it to bits, 2. Plug it in, 3. Ignore it: ")
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -403,7 +408,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == spikes:  # Spikes
             print(spikes.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1.Jump over the spikes, 2. Break off a spike, 3. Carefully walk through the spikes: "
                 )
@@ -443,7 +448,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == caves:  # Caves
             print(caves.desc)
             t_choice = ""
-            while t_choice != "1" or t_choice != "2" or t_choice != "3":
+            while t_choice != "1":
                 t_choice = input(
                     "1.The left cave, 2. The middle cave, 3. The right cave: "
                 )
@@ -457,7 +462,29 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             elif t_choice == "2":
                 print(caves.end2)
             elif t_choice == "3":
-                print(old_man.end3)
+                print(caves.end3)
                 player.hp = player.hp - 1
                 your_items.append(stalactite)
+
+        if random_trap == league:  # League
+            print(league.desc)
+            t_choice = ""
+            while t_choice != "1":
+                t_choice = input(
+                    "1.Play the game, 2. Run away, 3. Destroy the game: "
+                )
+                if t_choice == "2":
+                    break
+                elif t_choice == "3":
+                    break
+            if t_choice == "1":
+                print(league.end1)
+                player.hp = player.hp - 1
+            elif t_choice == "2":
+                print(league.end2)
+            elif t_choice == "3":
+                print(league.end3)
+                player.hp = player.hp - 1
+                your_items.append(power_cable)
+
     return player, ogre
