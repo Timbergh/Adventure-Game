@@ -37,3 +37,5 @@ pointy_spike = Items(
     "A sharp spike that seems to have slain a few adventurers already (+1 Dmg)", "Pointy spike")
 stalactite = Items(
     "A pointy rock that fell on your head from the ceiling of the cave(+1 Dmg)", "Stalactite")
+power_cable = Items(
+    "A sparking power cable, could probably be used like a taser(+2 Dmg)", "Power cable")
