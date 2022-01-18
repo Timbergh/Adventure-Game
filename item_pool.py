@@ -29,8 +29,6 @@ theos_jacket = Items(
     "His jacket still smells like him, you're brought back to a simpler time when you wear it (+3 Max Hp)", "Theo's Jacket")
 frog_tongue = Items(
     "A tongue droped from the Frog-King, it seems like it could be poisonous (+10% dmg each turn)", "Poisonous tongue")
-frog_crown = Items(
-    "The hearty crown of the late Frog king (+5 Max Hp)", "Frog-king's crown")
 cd_disc = Items(
     "A dusty old CD-rom disc that hasn't been used for decades,however it might be usable as a weapon (+1 Dmg)", "CD-rom disc")
 pointy_spike = Items(
@@ -41,3 +39,5 @@ power_cable = Items(
     "A sparking power cable, could probably be used like a taser(+1 Dmg)", "Power cable")
 graduation_cap = Items(
     "A stylish and comfortable cap (+2hp))", "Graduation cap")
+car_door = Items(
+    "You don't know what to do with this (-1 Dmg Taken)", "Car Door")

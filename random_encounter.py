@@ -149,17 +149,31 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                         clearConsole()
             elif turn % 2 == 0:
                 clearConsole()
-                player.hp = player.hp - e_dmg
-                turn = turn + 1
-                print(
-                    f"""
-                        | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
-                        | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+                if player.car_item == True:
+                    player.hp = player.hp - e_dmg + 1
+                    turn = turn + 1
+                    time.sleep(0.1)
+                    clearConsole()
+                    print(
+                        f"""
+                    | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
+                    | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
 
-                        | Attack [A] | | Inventory [I] | | Confirm [C] |
+                    | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
 
-                        """
-                )
+                    """)
+                else:
+                    player.hp = player.hp - e_dmg
+                    turn = turn + 1
+                    print(
+                        f"""
+                            | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
+                            | Your Damage: {player.dmg}     | Ogre Damage: {e_dmg}
+
+                            | Attack [A] | | Inventory [I] | | Confirm [C] |
+
+                            """
+                    )
                 time.sleep(0.5)
             if ogre.hp <= 0 or player.hp <= 0:
                 clearConsole()

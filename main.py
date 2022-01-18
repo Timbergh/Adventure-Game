@@ -11,7 +11,7 @@ from random_encounter import trap_pool
 
 def main():
     rand.shuffle(trap_pool)
-    rounds = 0
+    rounds = 5
     player = create_character()
     clearConsole()
     character = open("art/char1.txt", "r")

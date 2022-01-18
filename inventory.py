@@ -1,7 +1,7 @@
 from item_pool import *
 from clearConsole import clearConsole
 
-your_items = []
+your_items = [car_door]
 temporary_items = []
 
 
@@ -355,22 +355,21 @@ def inventory(player, your_items):
                 else:
                     clearConsole()
                     item_used = True
-            elif selected_item == frog_crown:  # frog-king's crown
+            elif selected_item == car_door:  # Car Door
                 print(
                     f"""
                 -------------------
-                {frog_crown.name}
-                {frog_crown.desc}
+                {car_door.name}
+                {car_door.desc}
                 -------------------
                 """
                 )
                 use_item = input(f"Do you want to use {selected_item} y/n -> ")
                 if use_item == "y":
                     clearConsole()
-                    your_items.remove(frog_crown)
+                    your_items.remove(car_door)
+                    player.car_item = True
                     item_used = True
-                    player.maxhp = player.maxhp + 5
-                    player.hp = player.hp + 5
                 else:
                     clearConsole()
                     item_used = True

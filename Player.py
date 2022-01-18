@@ -6,6 +6,7 @@ class Player:
         self.dmg = dmg
         self.wallet = wallet
         self.frog_item = False
+        self.car_item = False
 
     def __str__(self):
         return """

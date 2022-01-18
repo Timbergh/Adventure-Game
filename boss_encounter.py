@@ -78,19 +78,6 @@ def boss_encounter(rounds, player):
                         | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
 
                         """)
-                        if player.frog_item == True:
-                            frogking.hp = round(
-                                frogking.hp - frogking.maxhp*0.1)
-                            time.sleep(0.1)
-                            clearConsole()
-                            print(
-                                f"""                            {frog_txt.read()}
-                            | Your Hp: {health_bar(player)}  | Frog-King Hp: {health_bar(frogking)}
-                            | Your Damage: {player.dmg}     | Frog-King Damage: {frogking.dmg}
-
-                            | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
-
-                        """)
                     elif open_inventory == True:
                         clearConsole()
                         opend_inv = True
@@ -155,7 +142,7 @@ def boss_encounter(rounds, player):
 
                     """)
         while dominus.hp != 0 or player.hp != 0:
-            frog_txt = open("art/frogking.txt", "r")
+            dominus_txt = open("art/dominus.txt", "r")
             if opend_inv == True:
                 print(
                     f"""                            {dominus_txt.read()}
@@ -246,11 +233,11 @@ def boss_encounter(rounds, player):
                             | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
                             | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
 
-                        | You defeted Dominus! (Obtained a ) |
+                        | You defeted Dominus! (Obtained a car door) |
 
                         """)
                     input("Press enter to continue ")
-                    your_items.append(frog_tongue)
+                    your_items.append(car_door)
                     clearConsole()
                 elif player.hp <= 0:
                     player.hp = 0
