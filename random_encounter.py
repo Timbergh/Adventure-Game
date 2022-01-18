@@ -25,20 +25,23 @@ trap_pool = [
     old_man,
     caves,
     league,
+    well,
+    åva,
+]
+
+item_pool = [
+    burgir,
+    roids,
+    stick,
+    belt,
+    dripcap,
+    tie,
+    butter_stone,
+    gucci_flip_fops,
 ]
 
 
 def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
-    item_pool = [
-        burgir,
-        roids,
-        stick,
-        belt,
-        dripcap,
-        tie,
-        butter_stone,
-        gucci_flip_fops,
-    ]
     ogre = Enemy("Ogre", e_hp, e_hp, e_dmg)
     if rand_index == 1:
         random_item = rand.choice(item_pool)
@@ -483,7 +486,46 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 print(league.end2)
             elif t_choice == "3":
                 print(league.end3)
-                player.hp = player.hp - 1
                 your_items.append(power_cable)
+
+        if random_trap == well:  # Well
+            print(well.desc)
+            t_choice = ""
+            while t_choice != "1":
+                t_choice = input(
+                    "1.Toss a coin into it, 2. Swim in it, 3. Walk away: "
+                )
+                if t_choice == "2":
+                    break
+                elif t_choice == "3":
+                    break
+            if t_choice == "1":
+                print(well.end1)
+                player.wallet = player.wallet - 1
+                your_items.append(rand.choice(item_pool))
+            elif t_choice == "2":
+                print(well.end2)
+                player.hp = player.hp - 2
+            elif t_choice == "3":
+                print(well.end3)
+        if random_trap == åva:  # Åva
+            print(åva.desc)
+            t_choice = ""
+            while t_choice != "1":
+                t_choice = input(
+                    "1.Go to Tibble instead, 2. Study at the hospital, 3. Walk away: "
+                )
+                if t_choice == "2":
+                    break
+                elif t_choice == "3":
+                    break
+            if t_choice == "1":
+                print(well.end1)
+                player.hp = player.hp - 2
+            elif t_choice == "2":
+                print(well.end2)
+                your_items.append(graduation_cap)
+            elif t_choice == "3":
+                print(well.end3)
 
     return player, ogre

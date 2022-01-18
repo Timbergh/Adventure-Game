@@ -3,7 +3,6 @@ from clearConsole import clearConsole
 
 your_items = []
 temporary_items = []
-shop_items = [tie, burgir, red_potion]
 
 
 def inventory(player, your_items):
@@ -389,7 +388,7 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(cd_disc)
                     item_used = True
-                    playerdmg = playerdmg + 1
+                    player.dmg = player.dmg + 1
                 else:
                     clearConsole()
                     item_used = True
@@ -407,7 +406,7 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(pointy_spike)
                     item_used = True
-                    playerdmg = playerdmg + 1
+                    player.dmg = player.dmg + 1
                 else:
                     clearConsole()
                     item_used = True
@@ -425,7 +424,7 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(stalactite)
                     item_used = True
-                    playerdmg = playerdmg + 1
+                    player.dmg = player.dmg + 1
                 else:
                     clearConsole()
                     item_used = True
@@ -443,7 +442,25 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(power_cable)
                     item_used = True
-                    playerdmg = playerdmg + 2
+                    player.dmg = player.dmg + 1
+                else:
+                    clearConsole()
+                    item_used = True
+            elif selected_item == graduation_cap:  # Graduation cap
+                print(
+                    f"""
+                -------------------
+                {graduation_cap.name}
+                {graduation_cap.desc}
+                -------------------
+                """
+                )
+                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                if use_item == "y":
+                    clearConsole()
+                    your_items.remove(graduation_cap)
+                    item_used = True
+                    player.hp = player.hp + 2
                 else:
                     clearConsole()
                     item_used = True

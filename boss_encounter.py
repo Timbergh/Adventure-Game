@@ -8,15 +8,15 @@ from clearConsole import clearConsole
 
 
 def boss_encounter(rounds, player):
+    attack = False
+    open_inventory = False
+    opend_inv = False
     if rounds == 10:
         name = "The Frog-King"
         boss_hp = 30
         boss_dmg = 1
         frogking = Boss(name, boss_hp, boss_hp, boss_dmg)
         frog_txt = open("art/frogking.txt", "r")
-        attack = False
-        open_inventory = False
-        opend_inv = False
         turn = 1
         clearConsole()
         print(
@@ -85,8 +85,8 @@ def boss_encounter(rounds, player):
                             clearConsole()
                             print(
                                 f"""                            {frog_txt.read()}
-                            | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(frogking)}
-                            | Your Damage: {player.dmg}     | Ogre Damage: {frogking.dmg}
+                            | Your Hp: {health_bar(player)}  | Frog-King Hp: {health_bar(frogking)}
+                            | Your Damage: {player.dmg}     | Frog-King Damage: {frogking.dmg}
 
                             | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
 
@@ -143,3 +143,125 @@ def boss_encounter(rounds, player):
         boss_hp = 45
         boss_dmg = 2
         dominus = Boss(name, boss_hp, boss_hp, boss_dmg)
+        dominus_txt = open("art/dominus.txt", "r")
+        turn = 1
+        clearConsole()
+        print(
+            f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                            | Attack [A] | | Inventory [I] | | Confirm [C] |
+
+                    """)
+        while dominus.hp != 0 or player.hp != 0:
+            frog_txt = open("art/frogking.txt", "r")
+            if opend_inv == True:
+                print(
+                    f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
+
+                    """)
+                opend_inv = False
+            if turn % 2 != 0:
+                battle = input("What do you want to do? -> ").casefold()
+                if battle == "a":
+                    open_inventory = False
+                    attack = True
+                    clearConsole()
+                    print(
+                        f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                    """)
+                elif battle == "i":
+                    attack = False
+                    open_inventory = True
+                    clearConsole()
+                    print(
+                        f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | Attack [A] | | ->Inventory<- [I] | | Confirm [C] |
+
+                    """)
+                if battle == "c":
+                    if attack == True:
+                        dominus.hp = dominus.hp - player.dmg
+                        turn = turn + 1
+                        clearConsole()
+                        print(
+                            f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
+                        if player.frog_item == True:
+                            dominus.hp = round(
+                                dominus.hp - dominus.maxhp*0.1)
+                            time.sleep(0.1)
+                            clearConsole()
+                            print(
+                                f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                            | ->Attack<- [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
+                    elif open_inventory == True:
+                        clearConsole()
+                        opend_inv = True
+                        inventory(player, your_items)
+                        clearConsole()
+            elif turn % 2 == 0:
+                clearConsole()
+                player.hp = player.hp - dominus.dmg
+                turn = turn + 1
+                print(
+                    f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | Attack [A] | | Inventory [I] | | Confirm [C] |
+
+                        """)
+                time.sleep(0.5)
+            if dominus.hp <= 0 or player.hp <= 0:
+                frog_txt = open("art/frogking.txt", "r")
+                clearConsole()
+                if dominus.hp <= 0:
+                    dominus.hp = 0
+                    print(
+                        f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | You defeted Dominus! (Obtained a ) |
+
+                        """)
+                    input("Press enter to continue ")
+                    your_items.append(frog_tongue)
+                    clearConsole()
+                elif player.hp <= 0:
+                    player.hp = 0
+                    print(
+                        f"""                            {dominus_txt.read()}
+                            | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
+                            | Your Damage: {player.dmg}     | Dominus Damage: {dominus.dmg}
+
+                        | You were defeted by Dominus! |
+
+                        """)
+                    input("Press enter to continue ")
+                    clearConsole()
+                break

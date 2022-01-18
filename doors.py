@@ -23,7 +23,7 @@ def doors(player, rounds):
     boss_open = False
     shopdoor = False
     re = False
-    wallet = 0
+    wallet = player.wallet
     if rounds % 5 == 0 and rounds % 10 != 0:
         fountain = True
     else:
@@ -124,25 +124,25 @@ def doors(player, rounds):
             time.sleep(0.3)
             clearConsole()
             print(hd7.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd8.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd9.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd10.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd11.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd12.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd13.read())
-            time.sleep(0.3)
+            time.sleep(0.1)
             clearConsole()
             print(hd14.read())
             shopdoor = True
@@ -193,7 +193,7 @@ def doors(player, rounds):
                 print(shopopen2.read())
                 shopdoor = False
                 re = True
-                shop(wallet)
+                shop(player)
         if re == True:
             print(
                 f"""
