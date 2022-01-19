@@ -285,7 +285,6 @@ def doors(player, rounds):
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
                     )
-
         elif choose_door == "m":  # MIDDLE DOOR
             if middle_open == True:
                 clearConsole()
