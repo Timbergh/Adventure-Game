@@ -85,7 +85,7 @@ def doors(player, rounds):
             print(toilet.read())
             input(
                 f"\n\nYou took a sip of the holy fountains water and gained {player.maxhp - player.hp} Hp\nPress any button to continue"
-            )
+            ).casefold()
             toilets_gift = player.maxhp - player.hp
             player.hp = player.hp + toilets_gift
             holyopen = True
@@ -167,7 +167,7 @@ def doors(player, rounds):
                                         |_________________|
         """
         )
-        input("Press enter to continue ")
+        input("Press enter to continue ").casefold()
         boss_encounter(
             rounds,
             player,
@@ -236,6 +236,7 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
+                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"
@@ -276,7 +277,7 @@ def doors(player, rounds):
                 )
                 left_open = True
                 if rand_index == 2:
-                    input("Press enter to continue")
+                    input("Press enter to continue").casefold()
                     re = True
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
@@ -308,6 +309,7 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
+                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"
@@ -348,7 +350,7 @@ def doors(player, rounds):
                 )
                 middle_open = True
                 if rand_index == 2:
-                    input("Press enter to continue")
+                    input("Press enter to continue").casefold()
                     re = True
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
@@ -380,6 +382,7 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
+                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"
@@ -420,7 +423,7 @@ def doors(player, rounds):
                 )
                 right_open = True
                 if rand_index == 2:
-                    input("Press enter to continue")
+                    input("Press enter to continue").casefold()
                     re = True
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items

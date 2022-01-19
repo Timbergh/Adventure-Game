@@ -8,7 +8,7 @@ from Enemy import Enemy
 from health_bar import health_bar
 from inventory import *
 from trap_pool import *
-
+from replace_item import replace_item
 
 trap_pool = [
     boulder,
@@ -46,6 +46,10 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
     if rand_index == 1:
         random_item = rand.choice(item_pool)
         your_items.append(random_item)
+        if len(your_items) > 3:
+            input(
+                "You have no Item slots left\nPress enter to select Item to replace ").casefold()
+            replace_item(player)
     if rand_index == 2:
         if rounds < 5:
             e_hp = 1 + rounds * 0.8
@@ -190,7 +194,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                     )
                     player.wallet = player.wallet + rand.randint(1, 3)
                     print(f"You have {player.wallet} coins")
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     clearConsole()
                 elif player.hp <= 0:
                     player.hp = 0
@@ -203,7 +207,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
 
                         """
                     )
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     clearConsole()
 
                 break
@@ -216,7 +220,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             t_choice = ""
             while t_choice != "1":
                 t_choice = input(
-                    "1. Punch the boulder, 2. Run away, 3. Do nothing: ")
+                    "1. Punch the boulder, 2. Run away, 3. Do nothing: ").casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -235,7 +239,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1. Eat the cheese, 2. Continue on without doing anything, 3. Give the cheese to a passing mouse: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -257,7 +261,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1. Ask for a present, 2. Ask to sit in his lap, 3. Compliment his wife: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -286,7 +290,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1. Let him win, 2. Play him in a fair 1v1, 3. Run away: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -305,7 +309,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Wave and leave, 2. You feel a bit chilly, would you like to sneeze, 3. Show him your middle finger: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -325,7 +329,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Take the green potion, 2. Take the red potion, 3. Take the blue potion: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -348,7 +352,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Fish from the cliff, 2.Dive in to catch one, 3.Sit and rest: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -367,7 +371,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             t_choice = ""
             while t_choice != "1":
                 t_choice = input(
-                    "1.Walk away, 2. Trade with the Monke, 3. Run away: ")
+                    "1.Walk away, 2. Trade with the Monke, 3. Run away: ").casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -387,7 +391,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Tell him you're cold, 2. Confess your feelings for him, 3. Run away: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -407,7 +411,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             t_choice = ""
             while t_choice != "1":
                 t_choice = input(
-                    "1.Smash it to bits, 2. Plug it in, 3. Ignore it: ")
+                    "1.Smash it to bits, 2. Plug it in, 3. Ignore it: ").casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -427,7 +431,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Jump over the spikes, 2. Break off a spike, 3. Carefully walk through the spikes: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -446,7 +450,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Take the first bag, 2. Take the second bag, 3. Take the third bag: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -467,7 +471,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.The left cave, 2. The middle cave, 3. The right cave: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -488,7 +492,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             while t_choice != "1":
                 t_choice = input(
                     "1.Play the game, 2. Run away, 3. Destroy the game: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -505,30 +509,38 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
         if random_trap == well:  # Well
             print(well.desc)
             t_choice = ""
-            while t_choice != "1":
+            while t_choice != "2":
                 t_choice = input(
                     "1.Toss a coin into it, 2. Swim in it, 3. Walk away: "
-                )
-                if t_choice == "2":
-                    break
+                ).casefold()
+                if t_choice == "1":
+                    if player.wallet == 0:
+                        print(
+                            "You don't have a coin to toss in, what do you do instead?")
+                    else:
+                        break
                 elif t_choice == "3":
                     break
+
             if t_choice == "1":
-                print(well.end1)
-                player.wallet = player.wallet - 1
-                your_items.append(rand.choice(item_pool))
+                if player.wallet > 0:
+                    print(well.end1)
+                    player.wallet = player.wallet - 1
+                    your_items.append(rand.choice(item_pool))
+
             elif t_choice == "2":
                 print(well.end2)
                 player.hp = player.hp - 2
             elif t_choice == "3":
                 print(well.end3)
+
         if random_trap == åva:  # Åva
             print(åva.desc)
             t_choice = ""
             while t_choice != "1":
                 t_choice = input(
                     "1.Go to Tibble instead, 2. Study at the hospital, 3. Walk away: "
-                )
+                ).casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":

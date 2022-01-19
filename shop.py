@@ -44,7 +44,7 @@ def shop(player):
                         """
         )
         shop_choice = input(
-            "Which item whould you like to buy 1, 2, 3 or [q] to leave -> ")
+            "Which item whould you like to buy 1, 2, 3 or [q] to leave -> ").casefold()
         if shop_choice == "1":
             if player.wallet >= 10:
                 your_items.append(shop_item[0])

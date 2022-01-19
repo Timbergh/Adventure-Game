@@ -109,7 +109,7 @@ def boss_encounter(rounds, player):
                         | You defeted the Frog-king! (Obtained a poisonous tongue) |
 
                         """)
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     your_items.append(frog_tongue)
                     clearConsole()
                 elif player.hp <= 0:
@@ -122,7 +122,7 @@ def boss_encounter(rounds, player):
                         | You were defeted by the Frog-king! |
 
                         """)
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     clearConsole()
                 break
     elif rounds == 20:
@@ -236,7 +236,7 @@ def boss_encounter(rounds, player):
                         | You defeted Dominus! (Obtained a car door) |
 
                         """)
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     your_items.append(car_door)
                     clearConsole()
                 elif player.hp <= 0:
@@ -249,6 +249,6 @@ def boss_encounter(rounds, player):
                         | You were defeted by Dominus! |
 
                         """)
-                    input("Press enter to continue ")
+                    input("Press enter to continue ").casefold()
                     clearConsole()
                 break

@@ -11,5 +11,5 @@ def stats(player, name):
     Damage: {player.dmg}
     -------------
     """)
-    input("     Press any button to go back to menu")
+    input("     Press any button to go back to menu").casefold()
     clearConsole()

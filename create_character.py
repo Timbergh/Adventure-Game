@@ -4,7 +4,7 @@ from Player import Player
 
 
 def create_character():
-    name = input("Enter your name -> ")
+    name = input("Enter your name -> ").casefold()
     random_stats = rand.randint(2, 4)
     maxhp = random_stats
     hp = maxhp

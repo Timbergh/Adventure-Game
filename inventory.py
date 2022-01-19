@@ -1,7 +1,7 @@
 from item_pool import *
 from clearConsole import clearConsole
 
-your_items = [car_door]
+your_items = [burgir, tie, roids]
 temporary_items = []
 
 
@@ -102,7 +102,7 @@ def inventory(player, your_items):
         elif inv == "c":
             clearConsole()
             selected_item = item_one
-            if selected_item == "      ":  # EMPTY
+            if selected_item == "      ":  # NO ITEM
                 clearConsole()
                 print(
                     f"""
@@ -121,7 +121,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(burgir)
@@ -139,7 +140,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(belt)
@@ -159,7 +161,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(roids)
@@ -179,7 +182,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(dripcap)
@@ -198,7 +202,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(stick)
@@ -216,7 +221,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(jordans)
@@ -235,7 +241,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(tie)
@@ -254,7 +261,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(red_potion)
@@ -272,7 +280,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(knife)
@@ -290,7 +299,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(theos_jacket)
@@ -309,7 +319,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(poop)
@@ -327,7 +338,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(gucci_flip_fops)
@@ -346,7 +358,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(frog_tongue)
@@ -364,7 +377,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(car_door)
@@ -382,7 +396,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(cd_disc)
@@ -400,7 +415,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(pointy_spike)
@@ -418,7 +434,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(stalactite)
@@ -436,7 +453,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(power_cable)
@@ -454,7 +472,8 @@ def inventory(player, your_items):
                 -------------------
                 """
                 )
-                use_item = input(f"Do you want to use {selected_item} y/n -> ")
+                use_item = input(
+                    f"Do you want to use {selected_item} y/n -> ").casefold()
                 if use_item == "y":
                     clearConsole()
                     your_items.remove(graduation_cap)
