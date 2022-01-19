@@ -236,7 +236,6 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
-                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"
@@ -309,7 +308,6 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
-                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"
@@ -382,7 +380,6 @@ def doors(player, rounds):
                 rand_index = rand.choice(rand_door)
                 rand_door.remove(rand_index)
                 if rand_index == 1:
-                    re = True
                     ri = "found an item!"
                 elif rand_index == 2:
                     ri = "encounterd a monster!"

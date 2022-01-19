@@ -46,6 +46,11 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
     if rand_index == 1:
         random_item = rand.choice(item_pool)
         your_items.append(random_item)
+        if len(list(your_items)) > 3:
+            try:
+                your_items.remove("      ")
+            except:
+                pass
         if len(your_items) > 3:
             input(
                 "You have no Item slots left\nPress enter to select Item to replace ").casefold()
@@ -553,5 +558,14 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 your_items.append(graduation_cap)
             elif t_choice == "3":
                 print(well.end3)
+        if len(list(your_items)) > 3:
+            try:
+                your_items.remove("      ")
+            except:
+                pass
+        if len(your_items) > 3:
+            input(
+                "You have no Item slots left\nPress enter to select Item to replace ").casefold()
+            replace_item(player)
 
     return player, ogre

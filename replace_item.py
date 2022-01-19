@@ -8,18 +8,9 @@ def replace_item(player):
     item_recieved = your_items[3]
     your_items.remove(item_recieved)
     while inv != "q":
-        try:
-            item_one = your_items[0]
-        except:
-            item_one = "      "
-        try:
-            item_two = your_items[1]
-        except:
-            item_two = "      "
-        try:
-            item_three = your_items[2]
-        except:
-            item_three = "      "
+        item_one = your_items[0]
+        item_two = your_items[1]
+        item_three = your_items[2]
         clearConsole()
         print(
             f"""
@@ -37,19 +28,9 @@ def replace_item(player):
         clearConsole()
         if inv == "a":
             your_items.insert(0, your_items.pop())
-
-            try:
-                item_one = your_items[0]
-            except:
-                item_one = "      "
-            try:
-                item_two = your_items[1]
-            except:
-                item_two = "      "
-            try:
-                item_three = your_items[2]
-            except:
-                item_three = "      "
+            item_one = your_items[0]
+            item_two = your_items[1]
+            item_three = your_items[2]
             print(
                 f"""
                                             -INVENTORY-
@@ -62,18 +43,9 @@ def replace_item(player):
             )
         elif inv == "d":
             your_items.append(your_items.pop(0))
-            try:
-                item_one = your_items[0]
-            except:
-                item_one = "      "
-            try:
-                item_two = your_items[1]
-            except:
-                item_two = "      "
-            try:
-                item_three = your_items[2]
-            except:
-                item_three = "      "
+            item_one = your_items[0]
+            item_two = your_items[1]
+            item_three = your_items[2]
             print(
                 f"""
                                             -INVENTORY-
@@ -93,4 +65,5 @@ def replace_item(player):
                 your_items.insert(0, your_items.pop())
                 break
         elif inv == "q":
+            your_items.append(item_recieved)
             your_items.pop(3)

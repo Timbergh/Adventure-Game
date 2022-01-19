@@ -167,7 +167,6 @@ def inventory(player, your_items):
                     clearConsole()
                     your_items.remove(roids)
                     player.dmg = player.dmg + 5
-                    player.hp = player.hp - 1
                     temporary_items.append(roids)
                     item_used = True
                 else:
