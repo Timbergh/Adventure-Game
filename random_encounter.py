@@ -321,9 +321,9 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                     break
             if t_choice == "1":
                 print(joebiden.end1)
-                your_items.append(tie)
             elif t_choice == "2":
                 print(joebiden.end2)
+                your_items.append(tie)
             elif t_choice == "3":
                 print(joebiden.end3)
                 player.hp = player.hp - 1

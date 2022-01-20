@@ -67,3 +67,4 @@ def replace_item(player):
         elif inv == "q":
             your_items.append(item_recieved)
             your_items.pop(3)
+    your_items.append("Temp")

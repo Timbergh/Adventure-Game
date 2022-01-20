@@ -285,6 +285,14 @@ def doors(player, rounds):
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
                     )
+                    if len(list(your_items)) > 3:
+                        try:
+                            your_items.remove("      ")
+                        except:
+                            pass
+                    if len(your_items) > 3:
+                        re = True
+                        your_items.remove("Temp")
         elif choose_door == "m":  # MIDDLE DOOR
             if middle_open == True:
                 clearConsole()
@@ -356,6 +364,14 @@ def doors(player, rounds):
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
                     )
+                    if len(list(your_items)) > 3:
+                        try:
+                            your_items.remove("      ")
+                        except:
+                            pass
+                    if len(your_items) > 3:
+                        re = True
+                        your_items.remove("Temp")
 
         elif choose_door == "r":  # RIGHT DOOR
             if right_open == True:
@@ -428,6 +444,14 @@ def doors(player, rounds):
                     random_encounter(
                         rounds, player, e_hp, e_dmg, rand_index, your_items
                     )
+                    if len(list(your_items)) > 3:
+                        try:
+                            your_items.remove("      ")
+                        except:
+                            pass
+                    if len(your_items) > 3:
+                        re = True
+                        your_items.remove("Temp")
 
         elif choose_door == "q":  # BACK TO MENU
             clearConsole()

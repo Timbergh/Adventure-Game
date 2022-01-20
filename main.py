@@ -1,3 +1,4 @@
+from ast import Break
 import time
 import random as rand
 
@@ -11,7 +12,7 @@ from random_encounter import trap_pool
 
 def main():
     rand.shuffle(trap_pool)
-    rounds = 0
+    rounds = 29
     player = create_character()
     clearConsole()
     character = open("art/char1.txt", "r")
@@ -32,6 +33,10 @@ def main():
             print("You died...")
             game_over = open("art/gameover.txt", "r")
             print(game_over.read())
+            time.sleep(5)
+            break
+        if rounds > 30:
+            print("You have defeted every boss and won the game!")
             time.sleep(5)
             break
         menu = input("""
@@ -63,37 +68,3 @@ def main():
 
 
 main()
-
-
-"""
-Katt-guden Frasse:
-       ,
-       \`-._           __
-        \\  `-..____,.'  `.
-         :`.         /    \`.
-         :  )       :      : \
-          ;'        '   ;  |  :
-          )..      .. .:.`.;  :
-         /::...  .:::...   ` ;
-         ; _ '    __        /:\
-         `:o>   /\o_>      ;:. `.
-        `-`.__ ;   __..--- /:.   \
-        === \_/   ;=====_.':.     ;
-         ,/'`--'...`--....        ;
-              ;                    ;
-            .'                      ;
-          .'                        ;
-        .'     ..     ,      .       ;
-       :       ::..  /      ;::.     |
-      /      `.;::.  |       ;:..    ;
-     :         |:.   :       ;:.    ;
-     :         ::     ;:..   |.    ;
-      :       :;      :::....|     |
-      /\     ,/ \      ;:::::;     ;
-    .:. \:..|    :     ; '.--|     ;
-   ::.  :''  `-.,,;     ;'   ;     ;
-.-'. _.'\      / `;      \,__:      \
-`---'    `----'   ;      /    \,.,,,/
-                   `----`                   
-                                                                                                                    
- """
