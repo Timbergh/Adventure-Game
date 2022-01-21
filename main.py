@@ -12,7 +12,7 @@ from random_encounter import trap_pool
 
 def main():
     rand.shuffle(trap_pool)
-    rounds = 29
+    rounds = 0
     player = create_character()
     clearConsole()
     character = open("art/char1.txt", "r")
@@ -21,9 +21,9 @@ def main():
     input("Press enter to continue").casefold()
     clearConsole()
     print("I will now calculate your stats...\n")
-    time.sleep(0)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
+    time.sleep(2)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
     print(f"HP = {player.maxhp}")
-    time.sleep(0)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
+    time.sleep(1)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
     print(f"Damage = {player.dmg}\n")
     input("Press enter to continue").casefold()
     clearConsole()

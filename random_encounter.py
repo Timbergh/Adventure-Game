@@ -56,12 +56,9 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 "You have no Item slots left\nPress enter to select Item to replace ").casefold()
             replace_item(player)
     if rand_index == 2:
-        if rounds < 5:
-            e_hp = 1 + rounds * 0.8
-            e_hp = round(e_hp)
-        else:
-            e_hp = 1 + rounds * 0.5
-            e_hp = round(e_hp)
+        scaling = rand.uniform(0.5, 1.3)
+        e_hp = 1 + rounds * scaling
+        e_hp = round(e_hp)
         ogre.hp = e_hp
         ogre.maxhp = e_hp
         e_dmg = 1 + rounds * 0.5
@@ -174,6 +171,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 else:
                     player.hp = player.hp - e_dmg
                     turn = turn + 1
+                    time.sleep(0.5)
                     print(
                         f"""
                             | Your Hp: {health_bar(player)}  | Ogre Hp: {health_bar(ogre)}
@@ -385,7 +383,15 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 print(monke.end1)
             elif t_choice == "2":
                 print(monke.end2)
-                your_items.append(knife)
+                try:
+                    monke_steal = rand.choice(your_items)
+                    if monke_steal != "      ":
+                        your_items.remove(monke_steal)
+                        your_items.append(knife)
+                    elif monke_steal == "      ":
+                        print("You have no items so there will be no trade")
+                except:
+                    print("You have no items so there will be no trade")
             elif t_choice == "3":
                 print(monke.end3)
                 your_items.append(poop)
@@ -551,13 +557,13 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 elif t_choice == "3":
                     break
             if t_choice == "1":
-                print(well.end1)
+                print(åva.end1)
                 player.hp = player.hp - 2
             elif t_choice == "2":
-                print(well.end2)
+                print(åva.end2)
                 your_items.append(graduation_cap)
             elif t_choice == "3":
-                print(well.end3)
+                print(åva.end3)
         if len(list(your_items)) > 3:
             try:
                 your_items.remove("      ")

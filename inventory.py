@@ -1,7 +1,7 @@
 from item_pool import *
 from clearConsole import clearConsole
 
-your_items = [burgir, tie, roids]
+your_items = []
 temporary_items = []
 
 

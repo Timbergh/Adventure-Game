@@ -5,6 +5,7 @@ from health_bar import health_bar
 from inventory import inventory, your_items
 from item_pool import *
 from clearConsole import clearConsole
+from replace_item import replace_item
 
 
 def boss_encounter(rounds, player):
@@ -101,6 +102,7 @@ def boss_encounter(rounds, player):
                 clearConsole()
                 if frogking.hp <= 0:
                     frogking.hp = 0
+                    turn = turn + 1
                     print(
                         f"""                            {frog_txt.read()}
                             | Your Hp: {health_bar(player)}  | Frog-King Hp: {health_bar(frogking)}
@@ -228,6 +230,7 @@ def boss_encounter(rounds, player):
                 clearConsole()
                 if dominus.hp <= 0:
                     dominus.hp = 0
+                    turn = turn + 1
                     print(
                         f"""                            {dominus_txt.read()}
                             | Your Hp: {health_bar(player)}  | Dominus Hp: {health_bar(dominus)}
@@ -381,7 +384,7 @@ def boss_encounter(rounds, player):
                 break
     elif rounds == 30:
         name = "Frasse"
-        boss_hp = 55
+        boss_hp = 80
         boss_dmg = 5
         frasse = Boss(name, boss_hp, boss_hp, boss_dmg)
         frasse_txt = open("art/frasse.txt", "r")
@@ -482,6 +485,7 @@ def boss_encounter(rounds, player):
                 clearConsole()
                 if frasse.hp <= 0:
                     frasse.hp = 0
+                    turn = turn + 1
                     print(
                         f"""                            {frasse_txt.read()}
                             | Your Hp: {health_bar(player)}  | Frasse Hp: {health_bar(frasse)}
@@ -505,3 +509,12 @@ def boss_encounter(rounds, player):
                     input("Press enter to continue ").casefold()
                     clearConsole()
                 break
+    if len(list(your_items)) > 3:
+        try:
+            your_items.remove("      ")
+        except:
+            pass
+    if len(your_items) > 3:
+        input(
+            "You have no Item slots left\nPress enter to select Item to replace ").casefold()
+        replace_item(player)
