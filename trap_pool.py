@@ -14,7 +14,7 @@ alchemist = Trap("Alchemisttrap", "You enter an alchemist shop where they offer 
                  "You picked the green potion and suffer some damage (-2Hp)\n", "You picked the red potion and take it with you\n", "You picked the blue potion and feel permanently healthier(+1 Max HP)\n")
 lake = Trap("Laketrap", "After walking through the door you find yourself on a cliff next to a lake, you see that there are fish in the water, what do you do?\n", "You reeled in a fish!\n",
             "You dove in to catch the fish barehanded but you hit your head on the side of the cliff\n", "You rest up for a bit, enjoying the nice ambience, and then move on\n")
-monke = Trap("Monketrap", "You enter a room and find a monke sitting on a log, it looks at you as if it had been waiting for your arrival, what do you do?\n", "you slowly walk away from the monke, you get away safely\n", "You trade with the monke, losing 1 random item but gaining a knife it had saved away\n",
+monke = Trap("Monketrap", "You enter a room and find a monke sitting on a log, it looks at you as if it had been waiting for your arrival, what do you do?\n", "you slowly walk away from the monke, you get away safely\n", "You pet the monke, as a thanks he gave you his knife.\n",
              "You run away in a haste, but the monke flings its poop after you and it hits your back\n")
 theo = Trap("Theotrap", "You find yourself standing in a room with your childhood crush Theodor, What do you do?\n", "You tell the handsome boy that you are cold, and he offers you his jacket\n",
             "You confess your love for him however, he does not feel the same way and you suffer emotional damage(-1 Max Hp)\n", "You choose to avoid confrontation and run away\n")
@@ -33,7 +33,3 @@ well = Trap("Welltrap ", "You find an old wishingwell, for some reason you feel 
             "You decide to swim in the well, but the power of the well drags you down into the depths and you drown.\n", "You choose to ignore the well, passing up any possible treasures it may have been holding.\n")
 åva = Trap("Åvatrap ", "You find an boring old WWII hospital, what do you do?\n", "You decided to go to Tibble instead, As a result, Lillemor Larson comes out of the old war hospital in a fiery rage and beats you to a pulp.(-1hp)\n",
            "You choose to study at the hospital and get a degree, finally, after 3 long years you get a graduation cap.\n", "You ignore the crusty old building, thinking that nothing good can be gained from a place like that.\n")
-""" smt = Trap(" ", " ", " ", " ","")"""
-""" smt = Trap(" ", " ", " ", " ","")"""
-""" smt = Trap(" ", " ", " ", " ","")"""
-""" smt = Trap(" ", " ", " ", " ","")"""

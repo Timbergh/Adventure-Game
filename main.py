@@ -21,9 +21,9 @@ def main():
     input("Press enter to continue").casefold()
     clearConsole()
     print("I will now calculate your stats...\n")
-    time.sleep(2)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
+    time.sleep(2)
     print(f"HP = {player.maxhp}")
-    time.sleep(1)  # ÄNDRA PÅ TIDEN INNAN INLÄMNING
+    time.sleep(1)
     print(f"Damage = {player.dmg}\n")
     input("Press enter to continue").casefold()
     clearConsole()

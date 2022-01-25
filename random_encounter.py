@@ -56,12 +56,12 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 "You have no Item slots left\nPress enter to select Item to replace ").casefold()
             replace_item(player)
     if rand_index == 2:
-        scaling = rand.uniform(0.5, 1.3)
+        scaling = rand.uniform(0.5, 1.1)
         e_hp = 1 + rounds * scaling
         e_hp = round(e_hp)
         ogre.hp = e_hp
         ogre.maxhp = e_hp
-        e_dmg = 1 + rounds * 0.5
+        e_dmg = 1 + rounds * 0.3
         e_dmg = math.floor(e_dmg)
         attack = False
         open_inventory = False
@@ -374,7 +374,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
             t_choice = ""
             while t_choice != "1":
                 t_choice = input(
-                    "1.Walk away, 2. Trade with the Monke, 3. Run away: ").casefold()
+                    "1.Walk away, 2. Pet Monke, 3. Run away: ").casefold()
                 if t_choice == "2":
                     break
                 elif t_choice == "3":
@@ -383,15 +383,7 @@ def random_encounter(rounds, player, e_hp, e_dmg, rand_index, your_items):
                 print(monke.end1)
             elif t_choice == "2":
                 print(monke.end2)
-                try:
-                    monke_steal = rand.choice(your_items)
-                    if monke_steal != "      ":
-                        your_items.remove(monke_steal)
-                        your_items.append(knife)
-                    elif monke_steal == "      ":
-                        print("You have no items so there will be no trade")
-                except:
-                    print("You have no items so there will be no trade")
+                your_items.append(knife)
             elif t_choice == "3":
                 print(monke.end3)
                 your_items.append(poop)

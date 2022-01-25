@@ -14,7 +14,7 @@ tie = Items("Makes you a handsome little boy/girl :) (1+ Max Hp)", "Tie")
 red_potion = Items(
     "Drink at your leisure to gain some health back (+2 Hp)", "Red Potion")
 butter_stone = Items(
-    "Butterstone, Stone wit da butter on it(*This item does nothing*)", "Butterstone")
+    "Butterstone, Stone wit da butter on it(*This item does nothing*)", "Butterstone?")
 
 fish = Items("FIIIIIISH!, eat this to regain some health (+1Hp)", "Fish")
 
